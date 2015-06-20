@@ -22,7 +22,7 @@
     <EntitySetMapping Name="Distributors">
       <EntityTypeMapping TypeName="UnileverModel.Distributor">
         <MappingFragment StoreEntitySet="Distributors">
-          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Addr" ColumnName="Addr" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Email" ColumnName="Email" />

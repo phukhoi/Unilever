@@ -87,8 +87,8 @@
         <dxd:DockLayoutManager x:Name="dockLayoutManager">
             <dxd:LayoutGroup>
                 <dxd:LayoutGroup Orientation="Vertical"  ItemWidth="4*">
-                    <dxd:DocumentGroup ItemHeight="3*">
-                        <dxd:DocumentPanel Caption="Document1" ItemHeight="3*">
+                    <dxd:DocumentGroup ItemHeight="3*" Name="documentGroup">
+                        <dxd:DocumentPanel Caption="Products" ItemHeight="3*" Name="productTab">
                             <dxg:GridControl x:Name="gridProducts" AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
                                     <dxg:TableView AllowBandResizing="True"
@@ -98,9 +98,18 @@
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Caption="Categories" ItemHeight="3*" Name="categoriesTab" Visibility="Hidden">
+                            <dxg:GridControl x:Name="gridCategories" AutoGenerateColumns="AddNew" ShowBorder="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView AllowBandResizing="True"
+                                                   AllowBestFit="True" 
+                                                   AllowColumnMoving="True" 
+                                                   AllowResizing="True"/>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </dxd:DocumentPanel>
                     </dxd:DocumentGroup>
-                    <dxd:LayoutPanel Caption="DetailView" ItemHeight="*">
-                      
+                    <dxd:LayoutPanel Caption="DetailView" ItemHeight="*">                     
                     </dxd:LayoutPanel>
                 </dxd:LayoutGroup>
                 <dxd:TabbedGroup ItemWidth="*">
@@ -115,16 +124,9 @@
                             <dxnb:NavBarControl.Groups>
                                 <dxnb:NavBarGroup Header="Group1" ImageSource="Images/Icons/Group.png">
                                     <dxnb:NavBarItem Content="Item1" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item2" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item3" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item4" ImageSource="Images/Icons/Item.png"/>
                                 </dxnb:NavBarGroup>
                                 <dxnb:NavBarGroup Header="Group2" ImageSource="Images/Icons/Group.png">
                                     <dxnb:NavBarItem Content="Item1" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item2" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item3" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item4" ImageSource="Images/Icons/Item.png"/>
-                                    <dxnb:NavBarItem Content="Item5" ImageSource="Images/Icons/Item.png"/>
                                 </dxnb:NavBarGroup>
                             </dxnb:NavBarControl.Groups>
                             <dxnb:NavBarControl.View>

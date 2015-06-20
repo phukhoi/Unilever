@@ -65,10 +65,21 @@ namespace Unilever
 
         private void btnViewCats_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-
+            // view categories list
+            try
+            {
+                UnileverEntities ctx = new UnileverEntities();
+                List<Category> listCates = ctx.Categories.ToList();
+                this.gridProducts.ItemsSource = listCates;
+                if (this.categoriesTab.Visibility == System.Windows.Visibility.Hidden)
+                {
+                    this.categoriesTab.Visibility = System.Windows.Visibility.Visible;
+                }
+            }
+            catch (Exception)
+            {
+                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
+            }
         }
-
-       
-
     }
 }

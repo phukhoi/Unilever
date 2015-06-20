@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnileverDAL", "UnileverDAL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unilever", "Unilever\Unilever.csproj", "{A0BAC83A-9166-4AF0-9A2E-D1FD7F8D3429}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnileverBLL", "UnileverBLL\UnileverBLL.csproj", "{C295FB98-BC08-4533-83D1-4F459A3062F6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,12 @@ Global
 		{A0BAC83A-9166-4AF0-9A2E-D1FD7F8D3429}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A0BAC83A-9166-4AF0-9A2E-D1FD7F8D3429}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A0BAC83A-9166-4AF0-9A2E-D1FD7F8D3429}.Release|x64.ActiveCfg = Release|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C295FB98-BC08-4533-83D1-4F459A3062F6}.Release|x64.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

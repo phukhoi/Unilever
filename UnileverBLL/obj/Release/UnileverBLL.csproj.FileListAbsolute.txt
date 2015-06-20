@@ -1,0 +1,5 @@
+D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverBLL.dll
+D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverBLL.pdb
+D:\CODE\C#\Unilever\UnileverBLL\obj\Release\UnileverBLL.csprojResolveAssemblyReference.cache
+D:\CODE\C#\Unilever\UnileverBLL\obj\Release\UnileverBLL.dll
+D:\CODE\C#\Unilever\UnileverBLL\obj\Release\UnileverBLL.pdb

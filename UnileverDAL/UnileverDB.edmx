@@ -39,7 +39,7 @@
           <Property Name="Name" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="300" />
           <Property Name="Phone" Type="char" MaxLength="15" />
-          <Property Name="Address" Type="nvarchar" MaxLength="500" />
+          <Property Name="Addr" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="InterestRate">
           <Key>
@@ -118,7 +118,7 @@
           <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="Email" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
-          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Addr" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="InterestRate">
           <Key>
@@ -186,7 +186,7 @@
           <EntitySetMapping Name="Distributors">
             <EntityTypeMapping TypeName="UnileverModel.Distributor">
               <MappingFragment StoreEntitySet="Distributors">
-                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Addr" ColumnName="Addr" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Email" ColumnName="Email" />

@@ -34,7 +34,7 @@
     <Property Name="Name" Type="nvarchar" MaxLength="100" />
     <Property Name="Email" Type="nvarchar" MaxLength="300" />
     <Property Name="Phone" Type="char" MaxLength="15" />
-    <Property Name="Address" Type="nvarchar" MaxLength="500" />
+    <Property Name="Addr" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="InterestRate">
     <Key>

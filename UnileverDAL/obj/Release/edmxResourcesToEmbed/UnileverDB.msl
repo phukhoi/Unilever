@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="UnileverModelStoreContainer" CdmEntityContainer="UnileverEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="UnileverModel.Category">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DefferredLiabilities">
+      <EntityTypeMapping TypeName="UnileverModel.DefferredLiability">
+        <MappingFragment StoreEntitySet="DefferredLiabilities">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="DebtDate" ColumnName="DebtDate" />
+          <ScalarProperty Name="PeriodOfDebt" ColumnName="PeriodOfDebt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Distributors">
+      <EntityTypeMapping TypeName="UnileverModel.Distributor">
+        <MappingFragment StoreEntitySet="Distributors">
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="InterestRates">
+      <EntityTypeMapping TypeName="UnileverModel.InterestRate">
+        <MappingFragment StoreEntitySet="InterestRate">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OutOfDebtDate" ColumnName="OutOfDebtDate" />
+          <ScalarProperty Name="InterestPayable" ColumnName="InterestPayable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrderDetails">
+      <EntityTypeMapping TypeName="UnileverModel.OrderDetail">
+        <MappingFragment StoreEntitySet="OrderDetails">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="UnileverModel.Order">
+        <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="DistributorID" ColumnName="DistributorID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="UnileverModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="CatID" ColumnName="CatID" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
+          <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
+          <ScalarProperty Name="Descript" ColumnName="Descript" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

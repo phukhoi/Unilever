@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UnileverModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="UnileverEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="UnileverModel.Category" />
+    <EntitySet Name="DefferredLiabilities" EntityType="UnileverModel.DefferredLiability" />
+    <EntitySet Name="Distributors" EntityType="UnileverModel.Distributor" />
+    <EntitySet Name="InterestRates" EntityType="UnileverModel.InterestRate" />
+    <EntitySet Name="OrderDetails" EntityType="UnileverModel.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="UnileverModel.Order" />
+    <EntitySet Name="Products" EntityType="UnileverModel.Product" />
+  </EntityContainer>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="DefferredLiability">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="DebtDate" Type="DateTime" Precision="0" />
+    <Property Name="PeriodOfDebt" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Distributor">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Email" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
+    <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
+    <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="InterestRate">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="OutOfDebtDate" Type="Int32" />
+    <Property Name="InterestPayable" Type="Double" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="ProID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" Nullable="false" />
+    <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="DistributorID" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="CatID" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="ImportDate" Type="DateTime" Precision="0" />
+    <Property Name="RemainingAmount" Type="Int32" />
+    <Property Name="Descript" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+  </EntityType>
+</Schema>

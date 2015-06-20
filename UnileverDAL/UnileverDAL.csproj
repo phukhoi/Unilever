@@ -77,6 +77,9 @@
     <Compile Include="InterestRate.cs">
       <DependentUpon>UnileverDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Inventory.cs">
+      <DependentUpon>UnileverDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Order.cs">
       <DependentUpon>UnileverDB.tt</DependentUpon>
     </Compile>

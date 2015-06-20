@@ -14,7 +14,11 @@ namespace Unilever.Error
 
        public static void Show(string err, string caption, DevExpress.LookAndFeel.UserLookAndFeel lookAndFeel = null)
        {
-           XtraMessageBox.Show(lookAndFeel, CONNECT_DB_ERR, CAPTION_ERROR);
+          //System.Drawing.Icon icon = new System.Drawing.Icon();
+           XtraMessageBox.Show(lookAndFeel, err, caption,
+               System.Windows.Forms.MessageBoxButtons.OK,
+               System.Windows.Forms.MessageBoxIcon.Error,
+               DevExpress.Utils.DefaultBoolean.True);
        }
     }
 }

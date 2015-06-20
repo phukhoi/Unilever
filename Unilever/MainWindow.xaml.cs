@@ -22,6 +22,7 @@ using System.Collections.ObjectModel;
 using DevExpress.Xpf.NavBar;
 using DevExpress.Xpf.Charts;
 using DevExpress.Xpf.Gauges;
+using UnileverBLL;
 using UnileverDAL;
 using DevExpress.Skins;
 using Unilever.Error;
@@ -32,15 +33,33 @@ namespace Unilever
     {
         public MainWindow()
         {
-            InitializeComponent();
+            try
+            {
+                InitializeComponent();
+                SkinManager.EnableFormSkins();
+            }
+            catch (Exception)
+            {
+                Unilever.Error.UnileverError.Show("Something fail, try again.!", Unilever.Error.UnileverError.CAPTION_ERROR);
+            }
+        }
+        private void SetGridDataSource(GridControl gc, System.Collections.IList ds, DocumentPanel ownedTab)
+        {
+            gc.ItemsSource = ds;
+            if (ownedTab.Visibility == System.Windows.Visibility.Hidden || ownedTab.IsClosed)
+            {
+                ownedTab.Visibility = System.Windows.Visibility.Visible;
+                ownedTab.Closed = false;
+            }
+            ownedTab.Focus();
+            gc.Focus();
         }
         private void DXRibbonWindow_Loaded_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                SkinManager.EnableFormSkins();
-                UnileverEntities ctx = new UnileverEntities();
-                List<Product> listPros = ctx.Products.ToList();
+                Entities ctx = new Entities();
+                List<Product> listPros = ctx.GetListProducts();
                 this.gridProducts.ItemsSource = listPros;
             }
             catch (Exception)
@@ -51,18 +70,18 @@ namespace Unilever
         private void btnViewPros_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             // view products list
+            
             try
             {
                 UnileverEntities ctx = new UnileverEntities();
                 List<Product> listPros = ctx.Products.ToList();
-                this.gridProducts.ItemsSource = listPros;
+                SetGridDataSource(this.gridProducts, listPros, this.productTab);
             }
             catch (Exception)
             {
                 UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
             }
         }
-
         private void btnViewCats_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             // view categories list
@@ -70,16 +89,30 @@ namespace Unilever
             {
                 UnileverEntities ctx = new UnileverEntities();
                 List<Category> listCates = ctx.Categories.ToList();
-                this.gridProducts.ItemsSource = listCates;
-                if (this.categoriesTab.Visibility == System.Windows.Visibility.Hidden)
-                {
-                    this.categoriesTab.Visibility = System.Windows.Visibility.Visible;
-                }
+                SetGridDataSource(this.gridCategories, listCates,this.categoriesTab);
             }
             catch (Exception)
             {
                 UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
             }
+        }
+        private void btnViewDistributor_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                Entities ctx = new Entities();
+                List<Distributor> listDistribs = ctx.GetListDistributors();
+                SetGridDataSource(this.gridDistributors, listDistribs, this.distributorsTab);
+            }
+            catch (Exception)
+            {
+                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
+            }
+        }
+
+        private void btnAddDistribubor_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

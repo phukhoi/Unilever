@@ -15,7 +15,7 @@ namespace UnileverDAL
     public partial class InterestRate
     {
         public int ID { get; set; }
-        public Nullable<int> OutOfDebtDate { get; set; }
         public Nullable<double> InterestPayable { get; set; }
+        public Nullable<int> OutOfPeriod { get; set; }
     }
 }

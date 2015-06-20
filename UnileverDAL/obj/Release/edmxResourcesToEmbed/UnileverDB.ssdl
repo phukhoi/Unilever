@@ -5,6 +5,7 @@
     <EntitySet Name="DefferredLiabilities" EntityType="UnileverModel.Store.DefferredLiabilities" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Distributors" EntityType="UnileverModel.Store.Distributors" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="InterestRate" EntityType="UnileverModel.Store.InterestRate" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Inventories" EntityType="UnileverModel.Store.Inventories" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="OrderDetails" EntityType="UnileverModel.Store.OrderDetails" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Orders" EntityType="UnileverModel.Store.Orders" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Products" EntityType="UnileverModel.Store.Products" store:Type="Tables" Schema="dbo" />
@@ -41,8 +42,19 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="OutOfDebtDate" Type="int" />
+    <Property Name="OutOfPeriod" Type="int" />
     <Property Name="InterestPayable" Type="float" />
+  </EntityType>
+  <EntityType Name="Inventories">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="DistributorID" Type="int" />
+    <Property Name="ProID" Type="int" />
+    <Property Name="OrderedQuantity" Type="int" />
+    <Property Name="SoldQuantity" Type="int" />
+    <Property Name="OrderDate" Type="date" />
   </EntityType>
   <EntityType Name="OrderDetails">
     <Key>
@@ -62,6 +74,7 @@
     <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="OrderDate" Type="datetime" />
     <Property Name="DistributorID" Type="int" Nullable="false" />
+    <Property Name="OrderType" Type="int" />
   </EntityType>
   <EntityType Name="Products">
     <Key>

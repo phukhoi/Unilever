@@ -32,5 +32,6 @@ namespace UnileverDAL
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Inventory> Inventories { get; set; }
     }
 }

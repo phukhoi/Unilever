@@ -14,3 +14,10 @@ D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.Properties.Resources.resources
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.csproj.GenerateResource.Cache
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.exe
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.pdb
+D:\CODE\C#\Unilever\Unilever\bin\Release\EntityFramework.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\EntityFramework.SqlServer.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\EntityFramework.xml
+D:\CODE\C#\Unilever\Unilever\bin\Release\EntityFramework.SqlServer.xml
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverBLL.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverBLL.pdb
+D:\CODE\C#\Unilever\Unilever\bin\Release\DevExpress.Images.v15.1.dll

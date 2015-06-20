@@ -50,16 +50,20 @@
                 <dxr:RibbonPage Name="Second" Caption="Products">
                     <dxr:RibbonPageGroup Caption="{x:Null}" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" SmallGlyph="{dx:DXImage Image=EditDataSource_16x16.png}">
                         <dxb:BarButtonItem Name="btnViewPros" ItemClick="btnViewPros_ItemClick_1"
-                            Content="View" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" LargeGlyph="{dx:DXImage Image=EditDataSource_32x32.png}"/>
+                            Content="View Products List" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" LargeGlyph="{dx:DXImage Image=EditDataSource_32x32.png}"/>
                         <dxb:BarButtonItem Name="btnViewCats" ItemClick="btnViewCats_ItemClick_1" 
-                            Content="Categories" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
+                            Content="View Categories List" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
-                <dxr:RibbonPage Name="Third" Caption="Third Page">
-                </dxr:RibbonPage>
-                <dxr:RibbonPage Name="Forth" Caption="Fourth Page">
-                </dxr:RibbonPage>
-                <dxr:RibbonPage Name="Fifth" Caption="Fifth Page">
+                <dxr:RibbonPage Name="Third" Caption="Distributors">
+                    <dxr:RibbonPageGroup Caption="{x:Null}">
+                        <dxb:BarButtonItem Content="View Distributors List" Name="btnViewDistributor"
+                                           ItemClick="btnViewDistributor_ItemClick_1"
+                                           Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" LargeGlyph="{dx:DXImage Image=EditDataSource_32x32.png}"/>
+                        <dxb:BarButtonItem Content="Add Distributor"  Name="btnAddDistribubor"
+                                           ItemClick="btnAddDistribubor_ItemClick_1"
+                                           Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}"/>
+                    </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
             <dxr:RibbonControl.ToolbarItemLinks>
@@ -98,8 +102,18 @@
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
-                        <dxd:DocumentPanel Caption="Categories" ItemHeight="3*" Name="categoriesTab" Visibility="Hidden">
+                        <dxd:DocumentPanel Caption="Categories" ItemHeight="3*" Name="categoriesTab" Closed="True">
                             <dxg:GridControl x:Name="gridCategories" AutoGenerateColumns="AddNew" ShowBorder="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView AllowBandResizing="True"
+                                                   AllowBestFit="True" 
+                                                   AllowColumnMoving="True" 
+                                                   AllowResizing="True"/>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Caption="Distributors" ItemHeight="3*" Name="distributorsTab" Visibility="Hidden">
+                            <dxg:GridControl x:Name="gridDistributors" AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
                                     <dxg:TableView AllowBandResizing="True"
                                                    AllowBestFit="True" 

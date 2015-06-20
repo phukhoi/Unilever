@@ -10,6 +10,7 @@
           <EntitySet Name="DefferredLiabilities" EntityType="UnileverModel.Store.DefferredLiabilities" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Distributors" EntityType="UnileverModel.Store.Distributors" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="InterestRate" EntityType="UnileverModel.Store.InterestRate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Inventories" EntityType="UnileverModel.Store.Inventories" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="OrderDetails" EntityType="UnileverModel.Store.OrderDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Orders" EntityType="UnileverModel.Store.Orders" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Products" EntityType="UnileverModel.Store.Products" store:Type="Tables" Schema="dbo" />
@@ -46,8 +47,19 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="OutOfDebtDate" Type="int" />
+          <Property Name="OutOfPeriod" Type="int" />
           <Property Name="InterestPayable" Type="float" />
+        </EntityType>
+        <EntityType Name="Inventories">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DistributorID" Type="int" />
+          <Property Name="ProID" Type="int" />
+          <Property Name="OrderedQuantity" Type="int" />
+          <Property Name="SoldQuantity" Type="int" />
+          <Property Name="OrderDate" Type="date" />
         </EntityType>
         <EntityType Name="OrderDetails">
           <Key>
@@ -67,6 +79,7 @@
           <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="DistributorID" Type="int" Nullable="false" />
+          <Property Name="OrderType" Type="int" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
@@ -92,6 +105,23 @@
           <EntitySet Name="OrderDetails" EntityType="UnileverModel.OrderDetail" />
           <EntitySet Name="Orders" EntityType="UnileverModel.Order" />
           <EntitySet Name="Products" EntityType="UnileverModel.Product" />
+          <AssociationSet Name="CategoryProduct" Association="UnileverModel.CategoryProduct">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="OrderOrderDetail" Association="UnileverModel.OrderOrderDetail">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="ProductOrderDetail" Association="UnileverModel.ProductOrderDetail">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetail" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="DistributorOrder" Association="UnileverModel.DistributorOrder">
+            <End Role="Distributor" EntitySet="Distributors" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <EntitySet Name="Inventories" EntityType="UnileverModel.Inventory" />
         </EntityContainer>
         <EntityType Name="Category">
           <Key>
@@ -99,6 +129,7 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="UnileverModel.CategoryProduct" FromRole="Category" ToRole="Product" />
         </EntityType>
         <EntityType Name="DefferredLiability">
           <Key>
@@ -119,14 +150,15 @@
           <Property Name="Email" Type="String" MaxLength="300" Unicode="true" FixedLength="false" />
           <Property Name="Phone" Type="String" MaxLength="15" Unicode="false" FixedLength="true" />
           <Property Type="String" Name="Addr" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="UnileverModel.DistributorOrder" FromRole="Distributor" ToRole="Order" />
         </EntityType>
         <EntityType Name="InterestRate">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="OutOfDebtDate" Type="Int32" />
           <Property Name="InterestPayable" Type="Double" />
+          <Property Type="Int32" Name="OutOfPeriod" />
         </EntityType>
         <EntityType Name="OrderDetail">
           <Key>
@@ -138,6 +170,8 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="Price" Type="Int32" Nullable="false" />
           <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="UnileverModel.OrderOrderDetail" FromRole="OrderDetail" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="UnileverModel.ProductOrderDetail" FromRole="OrderDetail" ToRole="Product" />
         </EntityType>
         <EntityType Name="Order">
           <Key>
@@ -146,6 +180,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="OrderDate" Type="DateTime" Precision="3" />
           <Property Name="DistributorID" Type="Int32" Nullable="false" />
+          <Property Type="Int32" Name="OrderType" />
+          <NavigationProperty Name="OrderDetails" Relationship="UnileverModel.OrderOrderDetail" FromRole="Order" ToRole="OrderDetail" />
+          <NavigationProperty Name="Distributor" Relationship="UnileverModel.DistributorOrder" FromRole="Order" ToRole="Distributor" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -158,6 +195,67 @@
           <Property Name="ImportDate" Type="DateTime" Precision="0" />
           <Property Name="RemainingAmount" Type="Int32" />
           <Property Name="Descript" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="UnileverModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="OrderDetails" Relationship="UnileverModel.ProductOrderDetail" FromRole="Product" ToRole="OrderDetail" />
+        </EntityType>
+        <Association Name="CategoryProduct">
+          <End Type="UnileverModel.Category" Role="Category" Multiplicity="1" />
+          <End Type="UnileverModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="CatID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OrderOrderDetail">
+          <End Type="UnileverModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="UnileverModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ProductOrderDetail">
+          <End Type="UnileverModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="UnileverModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetail">
+              <PropertyRef Name="ProID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DistributorOrder">
+          <End Type="UnileverModel.Distributor" Role="Distributor" Multiplicity="1" />
+          <End Type="UnileverModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Distributor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="DistributorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Inventory">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DistributorID" />
+          <Property Type="Int32" Name="ProID" />
+          <Property Type="DateTime" Name="OrderDate" Precision="0" />
+          <Property Type="Int32" Name="OrderedQuantity" />
+          <Property Type="Int32" Name="SoldQuantity" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -197,8 +295,8 @@
           <EntitySetMapping Name="InterestRates">
             <EntityTypeMapping TypeName="UnileverModel.InterestRate">
               <MappingFragment StoreEntitySet="InterestRate">
+                <ScalarProperty Name="OutOfPeriod" ColumnName="OutOfPeriod" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="OutOfDebtDate" ColumnName="OutOfDebtDate" />
                 <ScalarProperty Name="InterestPayable" ColumnName="InterestPayable" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -218,6 +316,7 @@
           <EntitySetMapping Name="Orders">
             <EntityTypeMapping TypeName="UnileverModel.Order">
               <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
                 <ScalarProperty Name="DistributorID" ColumnName="DistributorID" />
@@ -234,6 +333,18 @@
                 <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
                 <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
                 <ScalarProperty Name="Descript" ColumnName="Descript" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Inventories">
+            <EntityTypeMapping TypeName="UnileverModel.Inventory">
+              <MappingFragment StoreEntitySet="Inventories">
+                <ScalarProperty Name="SoldQuantity" ColumnName="SoldQuantity" />
+                <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="ProID" ColumnName="ProID" />
+                <ScalarProperty Name="DistributorID" ColumnName="DistributorID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

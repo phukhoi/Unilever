@@ -33,8 +33,8 @@
     <EntitySetMapping Name="InterestRates">
       <EntityTypeMapping TypeName="UnileverModel.InterestRate">
         <MappingFragment StoreEntitySet="InterestRate">
+          <ScalarProperty Name="OutOfPeriod" ColumnName="OutOfPeriod" />
           <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="OutOfDebtDate" ColumnName="OutOfDebtDate" />
           <ScalarProperty Name="InterestPayable" ColumnName="InterestPayable" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -54,6 +54,7 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="UnileverModel.Order">
         <MappingFragment StoreEntitySet="Orders">
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
           <ScalarProperty Name="DistributorID" ColumnName="DistributorID" />
@@ -70,6 +71,18 @@
           <ScalarProperty Name="ImportDate" ColumnName="ImportDate" />
           <ScalarProperty Name="RemainingAmount" ColumnName="RemainingAmount" />
           <ScalarProperty Name="Descript" ColumnName="Descript" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Inventories">
+      <EntityTypeMapping TypeName="UnileverModel.Inventory">
+        <MappingFragment StoreEntitySet="Inventories">
+          <ScalarProperty Name="SoldQuantity" ColumnName="SoldQuantity" />
+          <ScalarProperty Name="OrderedQuantity" ColumnName="OrderedQuantity" />
+          <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="ProID" ColumnName="ProID" />
+          <ScalarProperty Name="DistributorID" ColumnName="DistributorID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

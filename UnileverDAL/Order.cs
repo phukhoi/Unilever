@@ -14,8 +14,17 @@ namespace UnileverDAL
     
     public partial class Order
     {
+        public Order()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int ID { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public int DistributorID { get; set; }
+        public Nullable<int> OrderType { get; set; }
+    
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual Distributor Distributor { get; set; }
     }
 }

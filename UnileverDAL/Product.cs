@@ -14,6 +14,11 @@ namespace UnileverDAL
     
     public partial class Product
     {
+        public Product()
+        {
+            this.OrderDetails = new HashSet<OrderDetail>();
+        }
+    
         public int ID { get; set; }
         public string Name { get; set; }
         public int CatID { get; set; }
@@ -21,5 +26,8 @@ namespace UnileverDAL
         public Nullable<System.DateTime> ImportDate { get; set; }
         public Nullable<int> RemainingAmount { get; set; }
         public string Descript { get; set; }
+    
+        public virtual Category Category { get; set; }
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

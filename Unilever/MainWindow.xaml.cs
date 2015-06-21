@@ -32,6 +32,7 @@ namespace Unilever
     public partial class MainWindow : DXRibbonWindow
     {
         public UnileverBLL.UnileverBLL UnileverBll { get; set; }
+
         private void SetGridDataSource(GridControl gc, System.Collections.IList ds)
         {
             gc.ItemsSource = ds;
@@ -78,7 +79,7 @@ namespace Unilever
             catch (Exception)
             {
                 UnileverError.Show("Choose a category for this product",
-                    UnileverError.CAPTION_WARN, System.Windows.Forms.MessageBoxIcon.Warning);
+                    UnileverError.WARN_CAPTION, System.Windows.Forms.MessageBoxIcon.Warning);
                 return;
             }
             string importdate = this.depImportDate.EditValue.ToString();
@@ -90,8 +91,8 @@ namespace Unilever
                 string.IsNullOrEmpty(catid) ||
                 string.IsNullOrEmpty(importdate))
             {
-                UnileverError.Show("Missing fill !", 
-                    UnileverError.CAPTION_WARN, 
+                UnileverError.Show("Missing field !", 
+                    UnileverError.WARN_CAPTION, 
                     System.Windows.Forms.MessageBoxIcon.Warning
                     );
             }
@@ -99,7 +100,7 @@ namespace Unilever
             {
                 try
                 {
-                    if (this.UnileverBll.SaveChanges(proId.Value, name, catid, price, importdate, remain, descript, option))
+                    if (this.UnileverBll.SaveChangesProduct(proId.Value, name, catid, price, importdate, remain, descript, option))
                     {
                         LoadProductToControl();
                     }
@@ -107,9 +108,38 @@ namespace Unilever
                 catch (Exception) // lưu dữ liệu bị lỗi
                 {
                     UnileverError.Show("Something fail, try again!", 
-                        UnileverError.CAPTION_ERR, 
+                        UnileverError.ERR_CAPTION, 
                         System.Windows.Forms.MessageBoxIcon.Warning
                         );
+                }
+            }
+        }
+        private void CRUD_Distributor(int? distribId, UnileverObject.BLL.CRUDOPTION option)
+        {
+            string name = this.txtdbName.Text;
+            string email = this.txtdbEmail.Text;
+            string phone = this.txtdbPhone.Text;
+            string addr = this.txtdbAddr.Text;
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(addr))
+            {
+                Handle.UnileverError.Show("Missing field.",
+                    Handle.UnileverError.WARN_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Warning);
+            }
+            else
+            {
+                try
+                {
+                    if (this.UnileverBll.SaveChangesDistributor(distribId.Value, name, email, phone, addr, option))
+                    {
+                        LoadDistributorToControl();
+                    }
+                    ClearTextBox();
+                }
+                catch (Exception) // có lỗi trong quá trình lưu vào db
+                {
+                    UnileverError.Show(UnileverError.SAVE_DB_ERRORMSG, UnileverError.WARN_CAPTION);
                 }
             }
         }
@@ -136,7 +166,7 @@ namespace Unilever
             }
             catch (Exception)
             {
-                Unilever.Handle.UnileverError.Show("Something fail, try again.!", Unilever.Handle.UnileverError.CAPTION_ERR);
+                Unilever.Handle.UnileverError.Show("Something fail, try again.!", Unilever.Handle.UnileverError.ERR_CAPTION);
             }
         }      
         private void DXRibbonWindow_Loaded_1(object sender, RoutedEventArgs e)
@@ -148,7 +178,7 @@ namespace Unilever
             }
             catch (Exception)
             {
-                Unilever.Handle.UnileverError.Show(Unilever.Handle.UnileverError.CONNECT_DB_ERR, Unilever.Handle.UnileverError.CAPTION_ERR);
+                Unilever.Handle.UnileverError.Show(Unilever.Handle.UnileverError.CONNECT_DB_ERRORMSG, Unilever.Handle.UnileverError.ERR_CAPTION);
             }
         }
         private void btnViewPros_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -161,7 +191,7 @@ namespace Unilever
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERRORMSG, UnileverError.ERR_CAPTION);
             }
         }
         private void btnViewCats_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -175,7 +205,7 @@ namespace Unilever
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERRORMSG, UnileverError.ERR_CAPTION);
             }
         }
         private void btnViewDistributor_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -186,47 +216,23 @@ namespace Unilever
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERRORMSG, UnileverError.ERR_CAPTION);
             }
         }
         private void btnAddDistribubor_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            Utils.WakeUp(this.addTab);
-            addTab.IsActive = true;
+            Utils.WakeUp(this.manageDistTab);
         }
         private void btndbAdd_Click_1(object sender, RoutedEventArgs e)
         {
-            string name = this.txtdbName.Text;
-            string email = this.txtdbEmail.Text;
-            string phone = this.txtdbPhone.Text;
-            string addr = this.txtdbAddr.Text;
-            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) ||
-                string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(addr))
-            {
-                Handle.UnileverError.Show("Missing field.",
-                    Handle.UnileverError.CAPTION_WARN,
-                    System.Windows.Forms.MessageBoxIcon.Warning);
-            }
-            else
-            {
-                try
-                {
-                    this.UnileverBll.AddDistributor(name, email, phone, addr);
-                    LoadDistributorToControl();
-                    ClearTextBox();
-                }
-                catch (Exception)
-                {
-                    UnileverError.Show(UnileverError.SAVE_DB_ERR, UnileverError.CAPTION_WARN);
-                }
-            }
-        }
+            CRUD_Distributor(0, UnileverObject.BLL.CRUDOPTION.CREATE);
+        }      
         private void tblProducts_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {
                 int ID = int.Parse(gridProducts.GetFocusedRowCellValue("ID").ToString());
-                Utils.Temp = ID;
+                Utils.TempProid = ID;
                 Product p = UnileverBll.GetProductById(ID);
                 this.txtpName.Text = p.Name;
                 this.txtpPrice.Text = p.Price.ToString();
@@ -241,20 +247,82 @@ namespace Unilever
             }
             catch (Exception)
             {
-                UnileverError.Show("Something fail", "Error");
+                // HACK
             }
         }
         private void btnUpdatePros_Click_1(object sender, RoutedEventArgs e)
         {
-            CRUD_Product((int)Utils.Temp, UnileverObject.BLL.CRUDOPTION.UPDATE);
+            CRUD_Product((int)Utils.TempProid, UnileverObject.BLL.CRUDOPTION.UPDATE);
         }  
         private void btnAddPros_Click_1(object sender, RoutedEventArgs e)
         {
-            CRUD_Product(null, UnileverObject.BLL.CRUDOPTION.CREATE);
+            CRUD_Product(0, UnileverObject.BLL.CRUDOPTION.CREATE);
         }
         private void btnClearText_Click_1(object sender, RoutedEventArgs e)
         {
             ClearTextBox();
+        }
+        private void btnRemovePros_Click_1(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.DialogResult dr = DevExpress.XtraEditors.XtraMessageBox.Show(
+                "Are your sure?", "Confirm",
+                System.Windows.Forms.MessageBoxButtons.YesNo,
+                System.Windows.Forms.MessageBoxIcon.Asterisk,
+                DevExpress.Utils.DefaultBoolean.True);
+            if (dr == System.Windows.Forms.DialogResult.Yes)
+            {
+                CRUD_Product((int)Utils.TempProid, UnileverObject.BLL.CRUDOPTION.DELETE);
+            }
+        }
+        private void btndbUpdate_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CRUD_Distributor((int)Utils.TempDistribId, UnileverObject.BLL.CRUDOPTION.UPDATE);
+            }
+            catch (Exception) // some thing fail when update
+            {
+                UnileverError.Show("Something fail, try again.", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        }
+        private void btndbRemove_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                CRUD_Distributor((int)Utils.TempDistribId, UnileverObject.BLL.CRUDOPTION.DELETE);
+            }
+            catch (Exception) // some thing fail when remove
+            {
+                UnileverError.Show("Something fail, try again.", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+        }
+        private void tblDistributors_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                int ID = int.Parse(gridDistributors.GetFocusedRowCellValue("ID").ToString());
+                Utils.TempDistribId= ID;
+                this.txtdbId.Text = Utils.TempDistribId.ToString();
+                this.txtdbName.Text = gridDistributors.GetFocusedRowCellValue("Name").ToString();
+                this.txtdbEmail.Text = gridDistributors.GetFocusedRowCellValue("Email").ToString();
+                this.txtdbAddr.Text = gridDistributors.GetFocusedRowCellValue("Addr").ToString();
+                this.txtdbPhone.Text = gridDistributors.GetFocusedRowCellValue("Phone").ToString();
+                Utils.WakeUp(this.manageDistTab);
+            }
+            catch (Exception)
+            {
+                // HACK
+            }
+        }
+
+        private void btnManageLiability_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            System.Data.Entity.Core.Objects.ObjectResult res = UnileverBll.UnileverEntities
+                .sp_getDistributorLiabilitiesSumary(1);
+            this.gridLiabities.ItemsSource = res;
+            Utils.WakeUp(this.liabilitiesTab);
         }
     }
 }

@@ -63,6 +63,10 @@
                         <dxb:BarButtonItem Content="Add Distributor"  Name="btnAddDistribubor"
                                            ItemClick="btnAddDistribubor_ItemClick_1"
                                            Glyph="{dx:DXImage Image=Add_32x32.png}" LargeGlyph="{dx:DXImage Image=Add_32x32.png}"/>
+                        <dxb:BarButtonItem Content="Manage liabilities"  Name="btnManageLiability"
+                                           ItemClick="btnManageLiability_ItemClick_1"
+                                           Glyph="{dx:DXImage Image=FormatAsTable_16x16.png}" LargeGlyph="{dx:DXImage Image=FormatAsTable_16x16.png}"/>
+                        <dxb:BarButtonItem />
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
@@ -116,11 +120,25 @@
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
-                        <dxd:DocumentPanel Caption="Distributors" ItemHeight="3*" Name="distributorsTab" Visibility="Hidden">
-                            <dxg:GridControl x:Name="gridDistributors" AutoGenerateColumns="AddNew" ShowBorder="False">
+                        <dxd:DocumentPanel Caption="Distributors" ItemHeight="3*" Name="distributorsTab" Closed="True">
+                            <dxg:GridControl x:Name="gridDistributors"
+                                             AutoGenerateColumns="AddNew" 
+                                             ShowBorder="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView AllowBandResizing="True" FocusedRowChanged="tblDistributors_FocusedRowChanged_1"
+                                                   AllowBestFit="True" Name="tblDistributors"
+                                                   AllowColumnMoving="True" 
+                                                   AllowResizing="True"/>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Caption="Liabilities" ItemHeight="3*" Name="liabilitiesTab" Closed="True">
+                            <dxg:GridControl x:Name="gridLiabities"
+                                             AutoGenerateColumns="AddNew" 
+                                             ShowBorder="False">
                                 <dxg:GridControl.View>
                                     <dxg:TableView AllowBandResizing="True"
-                                                   AllowBestFit="True" 
+                                                   AllowBestFit="True" Name="tblLiabilities"
                                                    AllowColumnMoving="True" 
                                                    AllowResizing="True"/>
                                 </dxg:GridControl.View>
@@ -159,23 +177,34 @@
                                               Grid.Column="1" />
                                 <dxe:TextEdit Grid.Row="4" Grid.Column="1" Name="txtpRemain" />
                                 <dxe:TextEdit Grid.Row="5" Grid.Column="1" Name="txtpDescript"/>
-
-                                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
-                                        Margin="0,0,0,0" Name="btnUpdatePros" Click="btnUpdatePros_Click_1"
+                                <StackPanel Orientation="Vertical"
+                                            Grid.RowSpan="5" Grid.Column="2"
+                                            Grid.Row="0">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="{x:Type Button}">
+                                            <Setter Property="Margin" Value="0,20,0,0" />
+                                        </Style>
+                                    </StackPanel.Resources>
+                                <Button Grid.Row="0" Grid.Column="2"
+                                        Margin="0,0,0,0" Name="btnUpdatePros" 
+                                        Click="btnUpdatePros_Click_1"
                                          Content="Update"/>
-                                <Button Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Click="btnAddPros_Click_1"
+                                <Button Grid.Row="2" Grid.Column="2" Click="btnAddPros_Click_1"
                                         Margin="0,0,0,0" Name="btnAddPros" 
                                         Content="Add"/>
-                                <Button Grid.Row="4" Grid.Column="2" Grid.RowSpan="2"
+                                <Button Grid.Row="2" Grid.Column="2" Click="btnRemovePros_Click_1"
+                                        Margin="0,0,0,0" Name="btnRemovePros" 
+                                        Content="Remove"/>
+                                <Button Grid.Row="4" Grid.Column="2"
                                         Margin="0,0,0,0" Name="btnClearText" Click="btnClearText_Click_1"
                                        Content="Clear text"/>
-                                
+                                </StackPanel>
                             </Grid>
                         </dxd:DocumentPanel>
                     </dxd:DocumentGroup>
                 </dxd:LayoutGroup>
                 <dxd:TabbedGroup ItemWidth="*">
-                    <dxd:LayoutPanel Caption="Add Distributor" Name="addTab" Closed="True">
+                    <dxd:LayoutPanel Caption="Distributor" Name="manageDistTab" Closed="True">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="5*" />
@@ -192,9 +221,10 @@
                                         <Setter Property="Height" Value="40"></Setter>
                                     </Style>
                                 </StackPanel.Resources>
+                                <dxe:TextEdit Name="txtdbId" NullText="Id" IsEnabled="False"/>
                                 <dxe:TextEdit Name="txtdbName" NullText="Name"/>
                                 <dxe:TextEdit Name="txtdbEmail" NullText="Email"/>
-                                <dxe:TextEdit Name="txtdbPhone" NullText="Phone"/>
+                                <dxe:TextEdit Name="txtdbPhone" NullText="Phone" MaxLength="15"/>
                                 <dxe:TextEdit Name="txtdbAddr" NullText="Address"/>
                             </StackPanel>
                             <StackPanel Margin="0,110,0,0" Grid.Row="0" Grid.Column="0">
@@ -204,20 +234,40 @@
                                         <Setter Property="Height" Value="40"></Setter>
                                     </Style>
                                 </StackPanel.Resources>
+                                <Label Content="ID"/>
                                 <Label Content="Name"/>
                                 <Label Content="Email"/>
                                 <Label Content="Phone"/>
                                 <Label Content="Address"/>
                             </StackPanel>
-                            <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                                <Button Content="Add" Name="btndbAdd" Click="btndbAdd_Click_1"
+                            <GroupBox Grid.Row="1" Grid.Column="0" Name="distFooterGrid"
+                                  Grid.ColumnSpan="2">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Button Content="Add" Name="btndbAdd" 
+                                            Click="btndbAdd_Click_1" Grid.Row="0" Grid.Column="2"
                                     Height="35" Width="70" DockPanel.Dock="Bottom"
                                     ></Button>
-                            </DockPanel>
-
+                                    <Button Content="Update" Name="btndbUpdate" 
+                                            Click="btndbUpdate_Click_1" Grid.Row="0" Grid.Column="1"
+                                    Height="35" Width="70" DockPanel.Dock="Bottom"
+                                    ></Button>
+                                    <Button Content="Remove" Name="btndbRemove" 
+                                            Click="btndbRemove_Click_1" Grid.Row="0" Grid.Column="0"
+                                    Height="35" Width="70" DockPanel.Dock="Bottom"
+                                    ></Button>
+                                </Grid>                              
+                            </GroupBox>
                         </Grid>
                     </dxd:LayoutPanel>
-                    <dxd:LayoutPanel Caption="Add Product" />
+                    <dxd:LayoutPanel Caption="Category" />
                 </dxd:TabbedGroup>
             </dxd:LayoutGroup>
             <dxd:DockLayoutManager.AutoHideGroups>
@@ -242,5 +292,4 @@
             </dxd:DockLayoutManager.AutoHideGroups>
         </dxd:DockLayoutManager>
     </DockPanel>
-
 </dxr:DXRibbonWindow>

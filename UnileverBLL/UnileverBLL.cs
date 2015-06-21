@@ -34,31 +34,62 @@ namespace UnileverBLL
         {
             return this.UnileverEntities.Distributors.ToList();
         }
-        public void AddDistributor(string name, string email, string phone, string addr)
+        public bool SaveChangesDistributor(int distribId, string name, string email, string phone, string addr, CRUDOPTION option)
         {
+            Distributor dt = null;
             try
             {
-                Distributor dt = new Distributor
-                    {
-                        Name = name,
-                        Email = email,
-                        Phone = phone,
-                        Addr = addr
-                    };
-                this.UnileverEntities.Distributors.Add(dt);
+                switch (option)
+                {
+                    case CRUDOPTION.CREATE:
+                        {
+                            dt = new Distributor
+                            {
+                                Name = name,
+                                Email = email,
+                                Addr = addr,
+                                Phone = phone
+                            };
+                            this.UnileverEntities.Distributors.Add(dt);
+                            break;
+                        }
+                    case CRUDOPTION.UPDATE:
+                        {
+                            dt = GetDistributorById(distribId);
+                            dt.Name = name;
+                            dt.Email = email;
+                            dt.Addr = addr;
+                            dt.Phone = phone;
+                            break;
+                        }
+                    case CRUDOPTION.DELETE:
+                        {
+                            dt = GetDistributorById(distribId);
+                            this.UnileverEntities.Distributors.Remove(dt);
+                            break;
+                        }
+                    default: break;
+                }
                 this.UnileverEntities.SaveChanges();
             }
             catch (Exception)
-            {
+            {               
                 throw;
             }
+            return true;
+        }
+
+        private Distributor GetDistributorById(int distribId)
+        {
+            Distributor dt = this.UnileverEntities.Distributors.Where(d => d.ID == distribId).FirstOrDefault();
+            return dt;
         }
         public Product GetProductById(int ID)
         {
             Product p = UnileverEntities.Products.Where(pr => pr.ID == ID).FirstOrDefault();
             return p;
         }
-        public bool SaveChanges(int? proId, string name, string catid, string price,
+        public bool SaveChangesProduct(int proId, string name, string catid, string price,
           string importdate, string remain, string descript, CRUDOPTION option = CRUDOPTION.CREATE)
         {
 
@@ -88,7 +119,7 @@ namespace UnileverBLL
                         }
                     case CRUDOPTION.UPDATE:
                         {
-                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId.Value).FirstOrDefault();
+                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
                             p.Name = name;
                             p.Descript = descript;
                             int rm;
@@ -104,7 +135,7 @@ namespace UnileverBLL
                         }
                     case CRUDOPTION.DELETE:
                         {
-                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId.Value).FirstOrDefault();
+                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
                             this.UnileverEntities.Products.Remove(p);
                             break;
                         }

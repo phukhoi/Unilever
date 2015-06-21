@@ -78,7 +78,6 @@
             <dxr:RibbonStatusBarControl.LeftItems>
                 <dxb:BarEditItemLink BarItemName="eEditItem" />
                 <dxb:BarCheckItemLink BarItemName="eCheckItem" />
-                <dxb:BarStaticItem Name="eStaticItem" Content="Static item" />
                 <dxb:BarButtonItemLink BarItemName="bCut" />
             </dxr:RibbonStatusBarControl.LeftItems>
             <dxr:RibbonStatusBarControl.RightItems>
@@ -142,7 +141,7 @@
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.3*" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="0.1*" />
+                                    <ColumnDefinition Width="0.15*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Name" FontSize="16" />
                                 <Label Grid.Row="1" Grid.Column="0" Content="Price" FontSize="16" />
@@ -160,10 +159,17 @@
                                               Grid.Column="1" />
                                 <dxe:TextEdit Grid.Row="4" Grid.Column="1" Name="txtpRemain" />
                                 <dxe:TextEdit Grid.Row="5" Grid.Column="1" Name="txtpDescript"/>
+
+                                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+                                        Margin="0,0,0,0" Name="btnUpdatePros" Click="btnUpdatePros_Click_1"
+                                         Content="Update"/>
+                                <Button Grid.Row="2" Grid.Column="2" Grid.RowSpan="2" Click="btnAddPros_Click_1"
+                                        Margin="0,0,0,0" Name="btnAddPros" 
+                                        Content="Add"/>
+                                <Button Grid.Row="4" Grid.Column="2" Grid.RowSpan="2"
+                                        Margin="0,0,0,0" Name="btnClearText" Click="btnClearText_Click_1"
+                                       Content="Clear text"/>
                                 
-                                <Button Grid.Row="0" Grid.Column="2" 
-                                        Margin="0,0,0,0"
-                                        Grid.RowSpan="2" Content="Update"/>
                             </Grid>
                         </dxd:DocumentPanel>
                     </dxd:DocumentGroup>

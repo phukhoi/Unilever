@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace UnileverObject
 {
-    public interface IBLL
+    public class BLL
     {
-       
+        public enum CRUDOPTION
+        {
+            CREATE = 1,
+            UPDATE = 2,
+            DELETE = 3,
+        };
     }
 }

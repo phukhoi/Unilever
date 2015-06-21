@@ -8,6 +8,8 @@ namespace Unilever.Handle
 {
     public class Utils
     {
+        public static object Temp { get; set; }
+
         public static void WakeUp(DevExpress.Xpf.Docking.LayoutPanel lp)
         {
             lp.Visibility = System.Windows.Visibility.Visible;
@@ -20,5 +22,6 @@ namespace Unilever.Handle
             dp.Closed = false;
             dp.IsActive = true;
         }    
+
     }
 }

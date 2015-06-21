@@ -43,12 +43,75 @@ namespace Unilever
             SetGridDataSource(this.gridDistributors, listDistribs);
             Handle.Utils.WakeUp(this.distributorsTab);
         }
-        private void ClearAddDbTextBox()
+        private void LoadProductToControl()
+        {
+            List<Product> listPros = UnileverBll.GetListProducts();
+            SetItemSourceProducts(listPros, this.gridProducts);
+            Handle.Utils.WakeUp(this.productTab);
+        }
+        private void ClearTextBox()
         {
             this.txtdbName.Text = "";
             this.txtdbEmail.Text = "";
             this.txtdbPhone.Text = "";
             this.txtdbAddr.Text = "";
+            
+            // textbox product
+            this.txtpName.Text = "";
+            this.txtpDescript.Text = "";
+            this.txtpRemain.Text = "";
+            this.txtpPrice.Text = "";
+        }
+        private void CRUD_Product(int? proId, UnileverObject.BLL.CRUDOPTION option)
+        {
+            Product p = new Product();
+
+            string name = this.txtpName.Text;
+            string price = this.txtpPrice.Text;
+            string remain = this.txtpRemain.Text;
+            string descript = this.txtpDescript.Text;
+            string catid = null;
+            try
+            {
+                catid = ((Category)this.cbxpCategory.SelectedItemValue).ID.ToString();
+            }
+            catch (Exception)
+            {
+                UnileverError.Show("Choose a category for this product",
+                    UnileverError.CAPTION_WARN, System.Windows.Forms.MessageBoxIcon.Warning);
+                return;
+            }
+            string importdate = this.depImportDate.EditValue.ToString();
+
+            if (string.IsNullOrEmpty(name) ||
+                string.IsNullOrEmpty(price) ||
+                string.IsNullOrEmpty(remain) ||
+                string.IsNullOrEmpty(descript) ||
+                string.IsNullOrEmpty(catid) ||
+                string.IsNullOrEmpty(importdate))
+            {
+                UnileverError.Show("Missing fill !", 
+                    UnileverError.CAPTION_WARN, 
+                    System.Windows.Forms.MessageBoxIcon.Warning
+                    );
+            }
+            else
+            {
+                try
+                {
+                    if (this.UnileverBll.SaveChanges(proId.Value, name, catid, price, importdate, remain, descript, option))
+                    {
+                        LoadProductToControl();
+                    }
+                }
+                catch (Exception) // lưu dữ liệu bị lỗi
+                {
+                    UnileverError.Show("Something fail, try again!", 
+                        UnileverError.CAPTION_ERR, 
+                        System.Windows.Forms.MessageBoxIcon.Warning
+                        );
+                }
+            }
         }
         private void SetItemSourceProducts(System.Collections.IList list, GridControl gc)
         {
@@ -88,17 +151,13 @@ namespace Unilever
                 Unilever.Handle.UnileverError.Show(Unilever.Handle.UnileverError.CONNECT_DB_ERR, Unilever.Handle.UnileverError.CAPTION_ERR);
             }
         }
-
-        
         private void btnViewPros_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             // view products list
 
             try
             {
-                List<Product> listPros = UnileverBll.GetListProducts();
-                SetItemSourceProducts(listPros, this.gridProducts);
-                Handle.Utils.WakeUp(this.productTab);
+                LoadProductToControl();
             }
             catch (Exception)
             {
@@ -154,7 +213,7 @@ namespace Unilever
                 {
                     this.UnileverBll.AddDistributor(name, email, phone, addr);
                     LoadDistributorToControl();
-                    ClearAddDbTextBox();
+                    ClearTextBox();
                 }
                 catch (Exception)
                 {
@@ -162,12 +221,12 @@ namespace Unilever
                 }
             }
         }
-
         private void tblProducts_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
         {
             try
             {
                 int ID = int.Parse(gridProducts.GetFocusedRowCellValue("ID").ToString());
+                Utils.Temp = ID;
                 Product p = UnileverBll.GetProductById(ID);
                 this.txtpName.Text = p.Name;
                 this.txtpPrice.Text = p.Price.ToString();
@@ -182,9 +241,21 @@ namespace Unilever
             }
             catch (Exception)
             {
-
                 UnileverError.Show("Something fail", "Error");
             }
+        }
+        private void btnUpdatePros_Click_1(object sender, RoutedEventArgs e)
+        {
+            CRUD_Product((int)Utils.Temp, UnileverObject.BLL.CRUDOPTION.UPDATE);
+        }  
+        private void btnAddPros_Click_1(object sender, RoutedEventArgs e)
+        {
+            CRUD_Product(null, UnileverObject.BLL.CRUDOPTION.CREATE);
+        }
+
+        private void btnClearText_Click_1(object sender, RoutedEventArgs e)
+        {
+            ClearTextBox();
         }
     }
 }

@@ -252,7 +252,6 @@ namespace Unilever
         {
             CRUD_Product(null, UnileverObject.BLL.CRUDOPTION.CREATE);
         }
-
         private void btnClearText_Click_1(object sender, RoutedEventArgs e)
         {
             ClearTextBox();

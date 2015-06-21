@@ -27,3 +27,10 @@ D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverObject.dll
 D:\CODE\C#\Unilever\Unilever\bin\Release\DistributorBLL.pdb
 D:\CODE\C#\Unilever\Unilever\bin\Release\Sale_EmployeeBLL.pdb
 D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverObject.pdb
+D:\CODE\C#\Unilever\Unilever\bin\Release\DevExpress.Charts.v15.1.Core.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\DevExpress.Data.v15.1.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\DevExpress.Data.v15.1.xml
+D:\CODE\C#\Unilever\Unilever\bin\Release\de\DevExpress.Data.v15.1.resources.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\es\DevExpress.Data.v15.1.resources.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\ja\DevExpress.Data.v15.1.resources.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\ru\DevExpress.Data.v15.1.resources.dll

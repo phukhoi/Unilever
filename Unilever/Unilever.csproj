@@ -125,7 +125,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Error\UnileverError.cs" />
+    <Compile Include="BLLFactory.cs" />
+    <Compile Include="Handle\UnileverError.cs" />
+    <Compile Include="Handle\Utils.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
@@ -167,6 +169,14 @@
     <Resource Include="Images\Icons\Item.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DistributorBLL\DistributorBLL.csproj">
+      <Project>{30afaa69-e43c-4243-941f-3b1d919e56f2}</Project>
+      <Name>DistributorBLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Sale_EmployeeBLL\Sale_EmployeeBLL.csproj">
+      <Project>{3a1476e2-e401-49b7-8ab0-47e4c5ebee83}</Project>
+      <Name>Sale_EmployeeBLL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnileverBLL\UnileverBLL.csproj">
       <Project>{c295fb98-bc08-4533-83d1-4f459a3062f6}</Project>
       <Name>UnileverBLL</Name>
@@ -174,6 +184,10 @@
     <ProjectReference Include="..\UnileverDAL\UnileverDAL.csproj">
       <Project>{2cd30108-b681-4896-89eb-ede4953fc674}</Project>
       <Name>UnileverDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnileverObject\UnileverObject.csproj">
+      <Project>{1ece6733-0fa2-45a1-a28b-78c28efbf666}</Project>
+      <Name>UnileverObject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

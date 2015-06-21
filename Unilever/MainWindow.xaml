@@ -90,19 +90,24 @@
         </dxr:RibbonStatusBarControl>
         <dxd:DockLayoutManager x:Name="dockLayoutManager">
             <dxd:LayoutGroup>
-                <dxd:LayoutGroup Orientation="Vertical"  ItemWidth="4*">
-                    <dxd:DocumentGroup ItemHeight="3*" Name="documentGroup">
-                        <dxd:DocumentPanel Caption="Products" ItemHeight="3*" Name="productTab">
-                            <dxg:GridControl x:Name="gridProducts" AutoGenerateColumns="AddNew" ShowBorder="False">
+                <dxd:LayoutGroup Orientation="Vertical"  ItemWidth="3*">
+                    <dxd:DocumentGroup ItemHeight="3*" Name="documentGroup" ClosePageButtonShowMode="InActiveTabPageHeader"
+                                       >
+                        <dxd:DocumentPanel Caption="Products" ItemHeight="3*" 
+                                           Name="productTab"
+                                           ShowCloseButton="True">
+                            <dxg:GridControl x:Name="gridProducts"
+                                             AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
-                                    <dxg:TableView AllowBandResizing="True"
-                                                   AllowBestFit="True" 
+                                    <dxg:TableView AllowBandResizing="True" Name="tblProducts"
+                                                   AllowBestFit="True"
+                                                   FocusedRowChanged="tblProducts_FocusedRowChanged_1"
                                                    AllowColumnMoving="True" 
                                                    AllowResizing="True"/>
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
-                        <dxd:DocumentPanel Caption="Categories" ItemHeight="3*" Name="categoriesTab" Closed="True">
+                        <dxd:DocumentPanel Caption="Categories" ItemHeight="2*" Name="categoriesTab" Closed="True">
                             <dxg:GridControl x:Name="gridCategories" AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
                                     <dxg:TableView AllowBandResizing="True"
@@ -123,12 +128,90 @@
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
                     </dxd:DocumentGroup>
-                    <dxd:LayoutPanel Caption="DetailView" ItemHeight="*">                     
-                    </dxd:LayoutPanel>
+                    <dxd:DocumentGroup Caption="DetailView" ItemHeight="1.5*">
+                        <dxd:DocumentPanel Caption="Product details">
+                            <Grid Margin="0,0,0,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                    <RowDefinition Height="1*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.3*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0.1*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0" Grid.Column="0" Content="Name" FontSize="16" />
+                                <Label Grid.Row="1" Grid.Column="0" Content="Price" FontSize="16" />
+                                <Label Grid.Row="2" Grid.Column="0" Content="Category" FontSize="16" />
+                                <Label Grid.Row="3" Grid.Column="0" Content="ImportDate" FontSize="16" />
+                                <Label Grid.Row="4" Grid.Column="0" Content="Remaining amount" FontSize="16" />
+                                <Label Grid.Row="5" Grid.Column="0" Content="Descript" FontSize="16" />
+
+                                <dxe:TextEdit Grid.Row="0" Grid.Column="1" Name="txtpName"/>
+                                <dxe:TextEdit Grid.Row="1" Grid.Column="1" Name="txtpPrice"/>
+                                <dxe:ComboBoxEdit AutoComplete="True" IsTextEditable="False"
+                                                    Name="cbxpCategory"
+                                                  Grid.Row="2" Grid.Column="1" />
+                                <dxe:DateEdit ShowToday="True" Grid.Row="3" Name="depImportDate"
+                                              Grid.Column="1" />
+                                <dxe:TextEdit Grid.Row="4" Grid.Column="1" Name="txtpRemain" />
+                                <dxe:TextEdit Grid.Row="5" Grid.Column="1" Name="txtpDescript"/>
+                                
+                                <Button Grid.Row="0" Grid.Column="2" 
+                                        Margin="0,0,0,0"
+                                        Grid.RowSpan="2" Content="Update"/>
+                            </Grid>
+                        </dxd:DocumentPanel>
+                    </dxd:DocumentGroup>
                 </dxd:LayoutGroup>
                 <dxd:TabbedGroup ItemWidth="*">
-                    <dxd:LayoutPanel Caption="Properties" />
-                    <dxd:LayoutPanel Caption="Explorer" />
+                    <dxd:LayoutPanel Caption="Add Distributor" Name="addTab" Closed="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5*" />
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition  Width="0.3*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Margin="0,100,0,0" Grid.Row="0" Grid.Column="1">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type dxe:TextEdit}">
+                                        <Setter Property="Margin" Value="0,3,0,0" />
+                                        <Setter Property="Height" Value="40"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <dxe:TextEdit Name="txtdbName" NullText="Name"/>
+                                <dxe:TextEdit Name="txtdbEmail" NullText="Email"/>
+                                <dxe:TextEdit Name="txtdbPhone" NullText="Phone"/>
+                                <dxe:TextEdit Name="txtdbAddr" NullText="Address"/>
+                            </StackPanel>
+                            <StackPanel Margin="0,110,0,0" Grid.Row="0" Grid.Column="0">
+                                <StackPanel.Resources>
+                                    <Style TargetType="{x:Type Label}">
+                                        <Setter Property="Margin" Value="0,3,0,0" />
+                                        <Setter Property="Height" Value="40"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
+                                <Label Content="Name"/>
+                                <Label Content="Email"/>
+                                <Label Content="Phone"/>
+                                <Label Content="Address"/>
+                            </StackPanel>
+                            <DockPanel Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                                <Button Content="Add" Name="btndbAdd" Click="btndbAdd_Click_1"
+                                    Height="35" Width="70" DockPanel.Dock="Bottom"
+                                    ></Button>
+                            </DockPanel>
+
+                        </Grid>
+                    </dxd:LayoutPanel>
+                    <dxd:LayoutPanel Caption="Add Product" />
                 </dxd:TabbedGroup>
             </dxd:LayoutGroup>
             <dxd:DockLayoutManager.AutoHideGroups>

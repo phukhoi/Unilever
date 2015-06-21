@@ -21,3 +21,9 @@ D:\CODE\C#\Unilever\Unilever\bin\Release\EntityFramework.SqlServer.xml
 D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverBLL.dll
 D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverBLL.pdb
 D:\CODE\C#\Unilever\Unilever\bin\Release\DevExpress.Images.v15.1.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\DistributorBLL.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\Sale_EmployeeBLL.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverObject.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\DistributorBLL.pdb
+D:\CODE\C#\Unilever\Unilever\bin\Release\Sale_EmployeeBLL.pdb
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverObject.pdb

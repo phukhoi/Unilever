@@ -25,61 +25,84 @@ using DevExpress.Xpf.Gauges;
 using UnileverBLL;
 using UnileverDAL;
 using DevExpress.Skins;
-using Unilever.Error;
+using Unilever.Handle;
 
 namespace Unilever
 {
     public partial class MainWindow : DXRibbonWindow
     {
+        public UnileverBLL.UnileverBLL UnileverBll { get; set; }
+        private void SetGridDataSource(GridControl gc, System.Collections.IList ds)
+        {
+            gc.ItemsSource = ds;
+            gc.Focus();
+        }
+        private void LoadDistributorToControl()
+        {
+            List<Distributor> listDistribs = UnileverBll.GetListDistributors();
+            SetGridDataSource(this.gridDistributors, listDistribs);
+            Handle.Utils.WakeUp(this.distributorsTab);
+        }
+        private void ClearAddDbTextBox()
+        {
+            this.txtdbName.Text = "";
+            this.txtdbEmail.Text = "";
+            this.txtdbPhone.Text = "";
+            this.txtdbAddr.Text = "";
+        }
+        private void SetItemSourceProducts(System.Collections.IList list, GridControl gc)
+        {
+            gc.AutoGenerateColumns = AutoGenerateColumnsMode.AddNew;
+            gc.ItemsSource = list;
+            gc.Columns.Remove(gridProducts.Columns[gridProducts.Columns.Count - 1]);
+        }
+        /**/
+
         public MainWindow()
         {
             try
             {
                 InitializeComponent();
                 SkinManager.EnableFormSkins();
+                UnileverBll = (UnileverBLL.UnileverBLL)BLLFactory.CreateInstance(BLLFactory.UNILEVER_BLL);
+                if (UnileverBll == null)
+                {
+                    MessageBox.Show("Missing Bus");
+                    Application.Current.Shutdown();
+                }
             }
             catch (Exception)
             {
-                Unilever.Error.UnileverError.Show("Something fail, try again.!", Unilever.Error.UnileverError.CAPTION_ERROR);
+                Unilever.Handle.UnileverError.Show("Something fail, try again.!", Unilever.Handle.UnileverError.CAPTION_ERR);
             }
-        }
-        private void SetGridDataSource(GridControl gc, System.Collections.IList ds, DocumentPanel ownedTab)
-        {
-            gc.ItemsSource = ds;
-            if (ownedTab.Visibility == System.Windows.Visibility.Hidden || ownedTab.IsClosed)
-            {
-                ownedTab.Visibility = System.Windows.Visibility.Visible;
-                ownedTab.Closed = false;
-            }
-            ownedTab.Focus();
-            gc.Focus();
-        }
+        }      
         private void DXRibbonWindow_Loaded_1(object sender, RoutedEventArgs e)
         {
             try
             {
-                Entities ctx = new Entities();
-                List<Product> listPros = ctx.GetListProducts();
-                this.gridProducts.ItemsSource = listPros;
+                List<Product> listPros = UnileverBll.GetListProducts();
+                SetItemSourceProducts(listPros, this.gridProducts);
             }
             catch (Exception)
             {
-                Unilever.Error.UnileverError.Show(Unilever.Error.UnileverError.CONNECT_DB_ERR, Unilever.Error.UnileverError.CAPTION_ERROR);
+                Unilever.Handle.UnileverError.Show(Unilever.Handle.UnileverError.CONNECT_DB_ERR, Unilever.Handle.UnileverError.CAPTION_ERR);
             }
         }
+
+        
         private void btnViewPros_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             // view products list
-            
+
             try
             {
-                UnileverEntities ctx = new UnileverEntities();
-                List<Product> listPros = ctx.Products.ToList();
-                SetGridDataSource(this.gridProducts, listPros, this.productTab);
+                List<Product> listPros = UnileverBll.GetListProducts();
+                SetItemSourceProducts(listPros, this.gridProducts);
+                Handle.Utils.WakeUp(this.productTab);
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
             }
         }
         private void btnViewCats_ItemClick_1(object sender, ItemClickEventArgs e)
@@ -87,32 +110,82 @@ namespace Unilever
             // view categories list
             try
             {
-                UnileverEntities ctx = new UnileverEntities();
-                List<Category> listCates = ctx.Categories.ToList();
-                SetGridDataSource(this.gridCategories, listCates,this.categoriesTab);
+                List<Category> listCates = UnileverBll.GetListCategories();
+                SetGridDataSource(this.gridCategories, listCates);
+                Handle.Utils.WakeUp(categoriesTab);
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
             }
         }
         private void btnViewDistributor_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             try
             {
-                Entities ctx = new Entities();
-                List<Distributor> listDistribs = ctx.GetListDistributors();
-                SetGridDataSource(this.gridDistributors, listDistribs, this.distributorsTab);
+                LoadDistributorToControl();
             }
             catch (Exception)
             {
-                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERROR);
+                UnileverError.Show(UnileverError.CONNECT_DB_ERR, UnileverError.CAPTION_ERR);
+            }
+        }
+        private void btnAddDistribubor_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            Utils.WakeUp(this.addTab);
+            addTab.IsActive = true;
+        }
+        private void btndbAdd_Click_1(object sender, RoutedEventArgs e)
+        {
+            string name = this.txtdbName.Text;
+            string email = this.txtdbEmail.Text;
+            string phone = this.txtdbPhone.Text;
+            string addr = this.txtdbAddr.Text;
+            if (string.IsNullOrEmpty(name) || string.IsNullOrEmpty(email) ||
+                string.IsNullOrEmpty(phone) || string.IsNullOrEmpty(addr))
+            {
+                Handle.UnileverError.Show("Missing field.",
+                    Handle.UnileverError.CAPTION_WARN,
+                    System.Windows.Forms.MessageBoxIcon.Warning);
+            }
+            else
+            {
+                try
+                {
+                    this.UnileverBll.AddDistributor(name, email, phone, addr);
+                    LoadDistributorToControl();
+                    ClearAddDbTextBox();
+                }
+                catch (Exception)
+                {
+                    UnileverError.Show(UnileverError.SAVE_DB_ERR, UnileverError.CAPTION_WARN);
+                }
             }
         }
 
-        private void btnAddDistribubor_ItemClick_1(object sender, ItemClickEventArgs e)
+        private void tblProducts_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
         {
+            try
+            {
+                int ID = int.Parse(gridProducts.GetFocusedRowCellValue("ID").ToString());
+                Product p = UnileverBll.GetProductById(ID);
+                this.txtpName.Text = p.Name;
+                this.txtpPrice.Text = p.Price.ToString();
+                List<Category> listCates = UnileverBll.GetListCategories();
+                this.cbxpCategory.ItemsSource = listCates;
+                this.cbxpCategory.ValueMember = "ID";
+                this.cbxpCategory.DisplayMember = "Name";
+                this.cbxpCategory.SelectedItem = p.Category;
+                this.txtpRemain.Text = p.RemainingAmount.ToString();
+                this.depImportDate.EditValue = System.DateTime.Today;
+                this.txtpDescript.Text = p.Descript;
+            }
+            catch (Exception)
+            {
 
+                UnileverError.Show("Something fail", "Error");
+            }
         }
     }
 }
+ 

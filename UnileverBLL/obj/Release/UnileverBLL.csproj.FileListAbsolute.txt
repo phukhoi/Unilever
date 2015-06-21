@@ -10,3 +10,5 @@ D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverDAL.dll
 D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverDAL.pdb
 D:\CODE\C#\Unilever\UnileverBLL\bin\Release\EntityFramework.xml
 D:\CODE\C#\Unilever\UnileverBLL\bin\Release\EntityFramework.SqlServer.xml
+D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverObject.dll
+D:\CODE\C#\Unilever\UnileverBLL\bin\Release\UnileverObject.pdb

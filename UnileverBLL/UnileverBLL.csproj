@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities.cs" />
+    <Compile Include="UnileverBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +57,10 @@
     <ProjectReference Include="..\UnileverDAL\UnileverDAL.csproj">
       <Project>{2cd30108-b681-4896-89eb-ede4953fc674}</Project>
       <Name>UnileverDAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnileverObject\UnileverObject.csproj">
+      <Project>{1ece6733-0fa2-45a1-a28b-78c28efbf666}</Project>
+      <Name>UnileverObject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

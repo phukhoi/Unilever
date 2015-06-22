@@ -1,2 +1,4 @@
 Unilever/App.config
 *.dll
+*.cache
+DistributorBLL/obj/Release/DistributorBLL.pdb

@@ -459,6 +459,7 @@ namespace Unilever
                                             TotalCash = list.Sum(s => s.TotalCash)
                                          };
                     this.gridSaleRevenueReduce.ItemsSource = srSumaryReduce;
+                    Utils.WakeUp(dpSaleRevenues);
                 }
             }
             catch (Exception)

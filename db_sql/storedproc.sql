@@ -73,4 +73,4 @@ begin
 		select * from @tbl
 end
 go
---exec sp_getDistributorLiabilitiesSumary 3
+exec sp_getDistributorLiabilitiesSumary 3

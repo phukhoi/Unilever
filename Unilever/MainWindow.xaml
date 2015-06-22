@@ -267,7 +267,9 @@
                             </GroupBox>
                         </Grid>
                     </dxd:LayoutPanel>
-                    <dxd:LayoutPanel Caption="Category" />
+                    <dxd:LayoutPanel Caption="Category">
+                        
+                    </dxd:LayoutPanel>
                 </dxd:TabbedGroup>
             </dxd:LayoutGroup>
             <dxd:DockLayoutManager.AutoHideGroups>

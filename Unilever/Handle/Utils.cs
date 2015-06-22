@@ -11,6 +11,7 @@ namespace Unilever.Handle
         public static object TempProid { get; set; }
         public static object TempCateId { get; set; }
         public static object TempDistribId { get; set; }
+        public static object TempLiabilitiyId { get; set; }
 
         public static void WakeUp(DevExpress.Xpf.Docking.LayoutPanel lp)
         {

@@ -79,7 +79,7 @@ namespace UnileverBLL
             return true;
         }
 
-        private Distributor GetDistributorById(int distribId)
+        public Distributor GetDistributorById(int distribId)
         {
             Distributor dt = this.UnileverEntities.Distributors.Where(d => d.ID == distribId).FirstOrDefault();
             return dt;
@@ -148,6 +148,75 @@ namespace UnileverBLL
                 throw ex;
             }
             return true;
+        }
+
+        public DefferredLiability GetDefferredLiabilityByOrderId(int ordID)
+        {
+            try
+            {
+                DefferredLiability dl = this.UnileverEntities.DefferredLiabilities
+                        .Where(d => d.OrderID == ordID).FirstOrDefault();
+                return dl;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public DefferredLiability GetDefferredLiabilityById(int defId)
+        {
+            try
+            {
+                DefferredLiability dl = this.UnileverEntities.DefferredLiabilities
+                    .FirstOrDefault(d => d.ID == defId);
+                return dl;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public void UpdateDefferredLiability(int defid, string defdate, string resday)
+        {
+            try
+            {
+                DefferredLiability dl = GetDefferredLiabilityById(defid);
+                dl.DebtDate = DateTime.Parse(defdate);
+                int rd;
+                int.TryParse(resday, out rd);
+                if (dl.PeriodOfDebt.HasValue)
+                {
+                    dl.PeriodOfDebt += rd;
+                }
+                this.UnileverEntities.SaveChanges();
+            }
+            catch (NullReferenceException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<int> GetListDistributorId()
+        {
+            try
+            {
+                IEnumerable<int> res = from d in this.UnileverEntities.Distributors
+                                       select d.ID;
+                return res.ToList();
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
         }
     }
 }

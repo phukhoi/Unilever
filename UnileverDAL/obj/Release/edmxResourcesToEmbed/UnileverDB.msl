@@ -96,12 +96,13 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="sp_getDistributorLiabilitiesSumary" FunctionName="UnileverModel.Store.sp_getDistributorLiabilitiesSumary">
       <ResultMapping>
-        <ComplexTypeMapping TypeName="UnileverModel.sp_getDistributorLiabilitiesSumary_Result">
+        <ComplexTypeMapping TypeName="UnileverModel.sp_getDistributorLiabilitiesSumary_Result1">
           <ScalarProperty Name="DistributorId" ColumnName="DistributorId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="OrderType" ColumnName="OrderType" />
           <ScalarProperty Name="Total" ColumnName="Total" />
           <ScalarProperty Name="DebtDate" ColumnName="DebtDate" />
+          <ScalarProperty Name="PeriodOfDebt" ColumnName="PeriodOfDebt" />
           <ScalarProperty Name="OutOfPeriod" ColumnName="OutOfPeriod" />
           <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
           <ScalarProperty Name="ToMoney" ColumnName="ToMoney" />

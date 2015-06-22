@@ -56,7 +56,7 @@ namespace Unilever
             this.txtdbEmail.Text = "";
             this.txtdbPhone.Text = "";
             this.txtdbAddr.Text = "";
-            
+
             // textbox product
             this.txtpName.Text = "";
             this.txtpDescript.Text = "";
@@ -91,8 +91,8 @@ namespace Unilever
                 string.IsNullOrEmpty(catid) ||
                 string.IsNullOrEmpty(importdate))
             {
-                UnileverError.Show("Missing field !", 
-                    UnileverError.WARN_CAPTION, 
+                UnileverError.Show("Missing field !",
+                    UnileverError.WARN_CAPTION,
                     System.Windows.Forms.MessageBoxIcon.Warning
                     );
             }
@@ -107,8 +107,8 @@ namespace Unilever
                 }
                 catch (Exception) // lưu dữ liệu bị lỗi
                 {
-                    UnileverError.Show("Something fail, try again!", 
-                        UnileverError.ERR_CAPTION, 
+                    UnileverError.Show("Something fail, try again!",
+                        UnileverError.ERR_CAPTION,
                         System.Windows.Forms.MessageBoxIcon.Warning
                         );
                 }
@@ -149,7 +149,21 @@ namespace Unilever
             gc.ItemsSource = list;
             gc.Columns.Remove(gridProducts.Columns[gridProducts.Columns.Count - 1]);
         }
-        /**/
+        private void LoadDefferredLiabilities()
+        {
+            List<sp_getDistributorLiabilitiesSumary_Result1> list = new List<sp_getDistributorLiabilitiesSumary_Result1>();
+
+            foreach (int dbid in this.UnileverBll.GetListDistributorId())
+            {
+                System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> res =
+                      UnileverBll.UnileverEntities.sp_getDistributorLiabilitiesSumary(dbid);
+                list.AddRange(res);
+            }
+            this.gridLiabities.ItemsSource = list;
+        }
+
+
+        /* ----------------------------------------------------------------------------------- */
 
         public MainWindow()
         {
@@ -168,7 +182,7 @@ namespace Unilever
             {
                 Unilever.Handle.UnileverError.Show("Something fail, try again.!", Unilever.Handle.UnileverError.ERR_CAPTION);
             }
-        }      
+        }
         private void DXRibbonWindow_Loaded_1(object sender, RoutedEventArgs e)
         {
             try
@@ -221,12 +235,12 @@ namespace Unilever
         }
         private void btnAddDistribubor_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            Utils.WakeUp(this.manageDistTab);
+            Utils.WakeUp(this.manageTab);
         }
         private void btndbAdd_Click_1(object sender, RoutedEventArgs e)
         {
             CRUD_Distributor(0, UnileverObject.BLL.CRUDOPTION.CREATE);
-        }      
+        }
         private void tblProducts_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
         {
             try
@@ -253,7 +267,7 @@ namespace Unilever
         private void btnUpdatePros_Click_1(object sender, RoutedEventArgs e)
         {
             CRUD_Product((int)Utils.TempProid, UnileverObject.BLL.CRUDOPTION.UPDATE);
-        }  
+        }
         private void btnAddPros_Click_1(object sender, RoutedEventArgs e)
         {
             CRUD_Product(0, UnileverObject.BLL.CRUDOPTION.CREATE);
@@ -303,13 +317,13 @@ namespace Unilever
             try
             {
                 int ID = int.Parse(gridDistributors.GetFocusedRowCellValue("ID").ToString());
-                Utils.TempDistribId= ID;
+                Utils.TempDistribId = ID;
                 this.txtdbId.Text = Utils.TempDistribId.ToString();
                 this.txtdbName.Text = gridDistributors.GetFocusedRowCellValue("Name").ToString();
                 this.txtdbEmail.Text = gridDistributors.GetFocusedRowCellValue("Email").ToString();
                 this.txtdbAddr.Text = gridDistributors.GetFocusedRowCellValue("Addr").ToString();
                 this.txtdbPhone.Text = gridDistributors.GetFocusedRowCellValue("Phone").ToString();
-                Utils.WakeUp(this.manageDistTab);
+                Utils.WakeUp(this.manageTab);
             }
             catch (Exception)
             {
@@ -319,11 +333,79 @@ namespace Unilever
 
         private void btnManageLiability_ItemClick_1(object sender, ItemClickEventArgs e)
         {
-            System.Data.Entity.Core.Objects.ObjectResult res = UnileverBll.UnileverEntities
-                .sp_getDistributorLiabilitiesSumary(1);
-            this.gridLiabities.ItemsSource = res;
-            Utils.WakeUp(this.liabilitiesTab);
+            try
+            {
+                LoadDefferredLiabilities();
+                Utils.WakeUp(this.liabilitiesTab);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+       
+        private void btndlUpdate_Click_1(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                DefferredLiability dl = this.UnileverBll.GetDefferredLiabilityById((int)Utils.TempLiabilitiyId);
+                string resday = this.txtdlresday.Text;
+                if (string.IsNullOrEmpty(resday))
+                {
+                    UnileverError.Show("Missing field", UnileverError.WARN_CAPTION,
+                        System.Windows.Forms.MessageBoxIcon.Warning);
+                    return;
+                }
+                this.UnileverBll.UpdateDefferredLiability((int)Utils.TempLiabilitiyId, dl.DebtDate.ToString(), resday);
+                LoadDefferredLiabilities();
+            }
+            catch (NullReferenceException)
+            {
+                UnileverError.Show("Missing defferred liability Id", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+                UnileverError.Show("Something fail when proceed database", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+
+        }
+
+        private void btndlRemove_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btndlAdd_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tblLiabilities_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                Utils.WakeUp(this.manageTab);
+                this.liabilityTab.IsActive = true;
+                sp_getDistributorLiabilitiesSumary_Result1 sp = e.NewRow as sp_getDistributorLiabilitiesSumary_Result1;
+                if (sp != null)
+                {
+                    DefferredLiability dl = this.UnileverBll.GetDefferredLiabilityByOrderId(sp.OrderId.Value);
+                    Utils.TempLiabilitiyId = dl.ID;
+                    Distributor db = this.UnileverBll.GetDistributorById(sp.DistributorId.Value);
+                    this.txtdldbid.Text = sp.DistributorId.Value.ToString();
+                    this.txtdlid.Text = dl.ID.ToString();
+                    this.txtdlorderid.Text = sp.OrderId.Value.ToString();
+                    this.txtdldbname.Text = db.Name;
+                }
+            }
+            catch (Exception)
+            {
+                // HACK
+            }
         }
     }
 }
- 

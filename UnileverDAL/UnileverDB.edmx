@@ -213,9 +213,6 @@
           <EntitySet Name="Orders" EntityType="Self.Order" />
           <EntitySet Name="OrderTypes" EntityType="Self.OrderType" />
           <EntitySet Name="Products" EntityType="Self.Product" />
-          <FunctionImport Name="sp_getDistributorLiabilitiesSumary" ReturnType="Collection(UnileverModel.sp_getDistributorLiabilitiesSumary_Result)">
-          <Parameter Name="distribid" Mode="In" Type="Int32" />
-          </FunctionImport>
           <AssociationSet Name="CategoryProduct" Association="UnileverModel.CategoryProduct">
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
@@ -240,6 +237,9 @@
             <End Role="Distributor" EntitySet="Distributors" />
             <End Role="Order" EntitySet="Orders" />
           </AssociationSet>
+          <FunctionImport Name="sp_getDistributorLiabilitiesSumary" ReturnType="Collection(UnileverModel.sp_getDistributorLiabilitiesSumary_Result1)">
+            <Parameter Name="distribid" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_getDistributorLiabilitiesSumary_Result">
           <Property Type="Int32" Name="DistributorId" Nullable="true" />
@@ -323,6 +323,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_getDistributorLiabilitiesSumary_Result1">
+          <Property Type="Int32" Name="DistributorId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="String" Name="OrderType" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="DateTime" Name="DebtDate" Nullable="true" />
+          <Property Type="Int32" Name="PeriodOfDebt" Nullable="true" />
+          <Property Type="Int32" Name="OutOfPeriod" Nullable="true" />
+          <Property Type="Double" Name="InterestRate" Nullable="true" />
+          <Property Type="Int32" Name="ToMoney" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_getDistributorLiabilitiesSumary_Result2">
+          <Property Type="Int32" Name="DistributorId" Nullable="true" />
+          <Property Type="Int32" Name="OrderId" Nullable="true" />
+          <Property Type="String" Name="OrderType" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="DateTime" Name="DebtDate" Nullable="true" />
+          <Property Type="Int32" Name="PeriodOfDebt" Nullable="true" />
+          <Property Type="Int32" Name="OutOfPeriod" Nullable="true" />
+          <Property Type="Double" Name="InterestRate" Nullable="true" />
+          <Property Type="Int32" Name="ToMoney" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -423,13 +445,14 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="sp_getDistributorLiabilitiesSumary" FunctionName="UnileverModel.Store.sp_getDistributorLiabilitiesSumary">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="UnileverModel.sp_getDistributorLiabilitiesSumary_Result">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="UnileverModel.sp_getDistributorLiabilitiesSumary_Result1">
                 <ScalarProperty Name="DistributorId" ColumnName="DistributorId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="OrderType" ColumnName="OrderType" />
                 <ScalarProperty Name="Total" ColumnName="Total" />
                 <ScalarProperty Name="DebtDate" ColumnName="DebtDate" />
+                <ScalarProperty Name="PeriodOfDebt" ColumnName="PeriodOfDebt" />
                 <ScalarProperty Name="OutOfPeriod" ColumnName="OutOfPeriod" />
                 <ScalarProperty Name="InterestRate" ColumnName="InterestRate" />
                 <ScalarProperty Name="ToMoney" ColumnName="ToMoney" />

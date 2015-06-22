@@ -11,13 +11,14 @@ namespace UnileverDAL
 {
     using System;
     
-    public partial class sp_getDistributorLiabilitiesSumary_Result
+    public partial class sp_getDistributorLiabilitiesSumary_Result1
     {
         public Nullable<int> DistributorId { get; set; }
         public Nullable<int> OrderId { get; set; }
         public string OrderType { get; set; }
         public Nullable<int> Total { get; set; }
         public Nullable<System.DateTime> DebtDate { get; set; }
+        public Nullable<int> PeriodOfDebt { get; set; }
         public Nullable<int> OutOfPeriod { get; set; }
         public Nullable<double> InterestRate { get; set; }
         public Nullable<int> ToMoney { get; set; }

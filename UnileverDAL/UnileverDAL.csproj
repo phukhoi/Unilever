@@ -94,7 +94,13 @@
       <DependentUpon>UnileverDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SaleRevenue.cs">
+      <DependentUpon>UnileverDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="sp_getDistributorLiabilitiesSumary_Result1.cs">
+      <DependentUpon>UnileverDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_getSaleRevenueSumaryByDistribId_Result.cs">
       <DependentUpon>UnileverDB.tt</DependentUpon>
     </Compile>
     <Compile Include="UnileverDB.Context.cs">

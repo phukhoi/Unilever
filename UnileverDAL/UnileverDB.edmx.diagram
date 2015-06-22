@@ -20,6 +20,7 @@
         <AssociationConnector Association="UnileverModel.OrderTypeOrder" />
         <AssociationConnector Association="UnileverModel.ProductOrderDetail" />
         <AssociationConnector Association="UnileverModel.DistributorOrder" />
+        <EntityTypeShape EntityType="UnileverModel.SaleRevenue" Width="1.5" PointX="2.875" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

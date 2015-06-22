@@ -151,19 +151,28 @@ namespace Unilever
         }
         private void LoadDefferredLiabilities()
         {
-            List<sp_getDistributorLiabilitiesSumary_Result1> list = new List<sp_getDistributorLiabilitiesSumary_Result1>();
-
-            foreach (int dbid in this.UnileverBll.GetListDistributorId())
+            try
             {
-                System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> res =
-                      UnileverBll.UnileverEntities.sp_getDistributorLiabilitiesSumary(dbid);
-                list.AddRange(res);
+                List<sp_getDistributorLiabilitiesSumary_Result1> list = this.UnileverBll.GetListDefferredLiabilities();
+                this.gridLiabities.ItemsSource = list;
             }
-            this.gridLiabities.ItemsSource = list;
+            catch (Exception)
+            {
+
+                UnileverError.Show("Something fail when getting data from db, try again",
+                    UnileverError.WARN_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Asterisk);
+            }
         }
 
-
+        private void LoadSaleRevenues()
+        {
+            List<SaleRevenue> list = this.UnileverBll.GetListSaleRevenues();
+            this.gridSaleRevenues.ItemsSource = list;
+        }
         /* ----------------------------------------------------------------------------------- */
+
+
 
         public MainWindow()
         {
@@ -376,12 +385,30 @@ namespace Unilever
 
         private void btndlRemove_Click_1(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void btndlAdd_Click_1(object sender, RoutedEventArgs e)
-        {
-
+            try
+            {
+                System.Windows.Forms.DialogResult dr = DevExpress.XtraEditors.XtraMessageBox.Show(
+                "Are your sure?", "Confirm",
+                System.Windows.Forms.MessageBoxButtons.YesNo,
+                System.Windows.Forms.MessageBoxIcon.Asterisk,
+                DevExpress.Utils.DefaultBoolean.True);
+                if (dr == System.Windows.Forms.DialogResult.Yes)
+                {
+                    DefferredLiability dl = this.UnileverBll.GetDefferredLiabilityById((int)Utils.TempLiabilitiyId);
+                    this.UnileverBll.RemoveDefferredLiability((int)Utils.TempLiabilitiyId);
+                    LoadDefferredLiabilities();
+                }
+            }
+            catch (NullReferenceException)
+            {
+                UnileverError.Show("Missing defferred liability Id", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
+            catch (Exception)
+            {
+                UnileverError.Show("Something fail when proceed database", UnileverError.ERR_CAPTION,
+                    System.Windows.Forms.MessageBoxIcon.Error);
+            }
         }
 
         private void tblLiabilities_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
@@ -405,6 +432,38 @@ namespace Unilever
             catch (Exception)
             {
                 // HACK
+            }
+        }
+
+        private void btnSaleRevenue_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            LoadSaleRevenues();
+            Utils.WakeUp(this.salerevenueTab);
+        }
+
+        private void tblSaleRevenues_FocusedRowChanged_1(object sender, FocusedRowChangedEventArgs e)
+        {
+            try
+            {
+                SaleRevenue sr = e.NewRow as SaleRevenue;
+                if (sr != null)
+                {
+                    List<sp_getSaleRevenueSumaryByDistribId_Result> list =
+                        this.UnileverBll.GetListSaleRevenueByDistributorId(sr.DistributorID.Value);
+                    this.gridSaleRevenueDetails.ItemsSource = list;
+
+                    var srSumaryReduce = from srsr in list
+                                         select new
+                                         {
+                                            Sold = list.Sum(s => s.SoldQuantity),
+                                            TotalCash = list.Sum(s => s.TotalCash)
+                                         };
+                    this.gridSaleRevenueReduce.ItemsSource = srSumaryReduce;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }

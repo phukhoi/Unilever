@@ -73,7 +73,7 @@ namespace UnileverBLL
                 this.UnileverEntities.SaveChanges();
             }
             catch (Exception)
-            {               
+            {
                 throw;
             }
             return true;
@@ -160,7 +160,7 @@ namespace UnileverBLL
             }
             catch (Exception)
             {
-                
+
                 throw;
             }
         }
@@ -214,7 +214,76 @@ namespace UnileverBLL
             }
             catch (Exception)
             {
-                
+
+                throw;
+            }
+        }
+
+        public void RemoveDefferredLiability(int defid)
+        {
+            try
+            {
+                DefferredLiability dl = this.GetDefferredLiabilityById(defid);
+                this.UnileverEntities.DefferredLiabilities.Remove(dl);
+                this.UnileverEntities.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<SaleRevenue> GetListSaleRevenues()
+        {
+            try
+            {
+                List<SaleRevenue> list = this.UnileverEntities.SaleRevenues.ToList();
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<sp_getDistributorLiabilitiesSumary_Result1> GetListDefferredLiabilities()
+        {
+            try
+            {
+                List<sp_getDistributorLiabilitiesSumary_Result1> list =
+                    new List<sp_getDistributorLiabilitiesSumary_Result1>();
+
+                foreach (int dbid in GetListDistributorId())
+                {
+                    System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> res =
+                          UnileverEntities.sp_getDistributorLiabilitiesSumary(dbid);
+                    list.AddRange(res);
+                }
+                return list;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<sp_getSaleRevenueSumaryByDistribId_Result> GetListSaleRevenueByDistributorId(int distribId)
+        {
+            try
+            {
+                List<sp_getSaleRevenueSumaryByDistribId_Result> list =
+                    new List<sp_getSaleRevenueSumaryByDistribId_Result>();
+                System.Data.Entity.Core.Objects.ObjectResult<sp_getSaleRevenueSumaryByDistribId_Result> res =
+                      UnileverEntities.sp_getSaleRevenueSumaryByDistribId(distribId);
+                list.AddRange(res);
+                return list;
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

@@ -37,7 +37,7 @@ create table Orders
 	ID int identity primary key,
 	OrderDate datetime,
 	DistributorID int,
-	OrderType int -- loại hóa đơn: định kỳ - không định kỳ
+	OrderTypeId int -- loại hóa đơn: định kỳ - không định kỳ
 )
 go
 create table OrderDetails
@@ -79,5 +79,15 @@ create table OrderType
 (
 	ID int primary key,
 	OrderType nvarchar(100)
+)
+go
+create table SaleRevenues -- doanh số bán hàng
+(
+	ID int identity primary key,
+	DistributorID int,
+	ProId int unique,
+	SoldQuantity int,
+	TotalCash int, -- tồng tiền 
+	StatisDate date -- ngày thống kê
 )
 go

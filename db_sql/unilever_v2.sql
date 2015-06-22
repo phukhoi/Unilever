@@ -44,6 +44,7 @@ create table OrderDetails
 (
 	ID int identity primary key,
 	ProID int, 
+	OrderID int,
 	Quantity int,
 	Price int,
 	TotalAmount int -- = quantity * price

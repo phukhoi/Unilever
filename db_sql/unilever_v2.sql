@@ -91,3 +91,4 @@ create table SaleRevenues -- doanh số bán hàng
 	StatisDate date -- ngày thống kê
 )
 go
+alter table inventories add constraint uq_distrib_pro unique (DistributorID, ProID)

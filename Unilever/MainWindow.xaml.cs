@@ -170,6 +170,14 @@ namespace Unilever
             List<SaleRevenue> list = this.UnileverBll.GetListSaleRevenues();
             this.gridSaleRevenues.ItemsSource = list;
         }
+        private void InitGridFindPanel()
+        {
+            this.gridCategories.View.ShowSearchPanel(true);
+            this.gridDistributors.View.ShowSearchPanel(true);
+            this.gridLiabities.View.ShowSearchPanel(true);
+            this.gridProducts.View.ShowSearchPanel(true);
+            this.gridSaleRevenues.View.ShowSearchPanel(true);
+        }
         /* ----------------------------------------------------------------------------------- */
 
 
@@ -194,6 +202,8 @@ namespace Unilever
         }
         private void DXRibbonWindow_Loaded_1(object sender, RoutedEventArgs e)
         {
+            InitGridFindPanel();
+
             try
             {
                 List<Product> listPros = UnileverBll.GetListProducts();
@@ -204,6 +214,8 @@ namespace Unilever
                 Unilever.Handle.UnileverError.Show(Unilever.Handle.UnileverError.CONNECT_DB_ERRORMSG, Unilever.Handle.UnileverError.ERR_CAPTION);
             }
         }
+
+
         private void btnViewPros_ItemClick_1(object sender, ItemClickEventArgs e)
         {
             // view products list
@@ -354,7 +366,7 @@ namespace Unilever
             }
         }
 
-       
+
         private void btndlUpdate_Click_1(object sender, RoutedEventArgs e)
         {
             try
@@ -452,18 +464,38 @@ namespace Unilever
                         this.UnileverBll.GetListSaleRevenueByDistributorId(sr.DistributorID.Value);
                     this.gridSaleRevenueDetails.ItemsSource = list;
 
-                    var srSumaryReduce = from srsr in list
-                                         select new
-                                         {
-                                            Sold = list.Sum(s => s.SoldQuantity),
-                                            TotalCash = list.Sum(s => s.TotalCash)
-                                         };
+                    var srSumaryReduce = list.Select(s => new
+                    {
+                        Sold = list.Sum(srsr => srsr.SoldQuantity),
+                        TotalCash = list.Sum(selr => selr.TotalCash)
+                    }).Distinct();
+                    //from srsr in list
+                    //                     select new
+                    //                     {
+                    //                        Sold = list.Sum(s => s.SoldQuantity),
+                    //                        TotalCash = list.Sum(s => s.TotalCash)
+                    //                     };
                     this.gridSaleRevenueReduce.ItemsSource = srSumaryReduce;
                     Utils.WakeUp(dpSaleRevenues);
                 }
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        private void btnManageInventory_ItemClick_1(object sender, ItemClickEventArgs e)
+        {
+            try
+            {
+                List<Inventory> list = this.UnileverBll.GetListInventories();
+                this.gridInventories.ItemsSource = list;
+                Utils.WakeUp(inventoriesTab);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }

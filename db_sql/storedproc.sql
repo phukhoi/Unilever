@@ -75,3 +75,14 @@ end
 go
 
 /**********************/
+create proc sp_getSaleRevenueSumaryByDistribId
+@distribid int
+as
+begin
+	select Distributors.Name, SaleRevenues.ProId, Products.Price,SaleRevenues.SoldQuantity, 
+	SaleRevenues.TotalCash, SaleRevenues.StatisDate
+	from SaleRevenues, Distributors, products 
+	where SaleRevenues.ProId = Products.ID and SaleRevenues.DistributorID = Distributors.ID
+	and Distributors.ID = @distribid
+end
+go

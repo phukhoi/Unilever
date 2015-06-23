@@ -70,6 +70,10 @@
                                            ItemClick="btnSaleRevenue_ItemClick_1"
                                            Glyph="{dx:DXImage Image=FormatAsTable_16x16.png}" LargeGlyph="{dx:DXImage Image=FormatAsTable_16x16.png}">   
                         </dxb:BarButtonItem>
+                        <dxb:BarButtonItem Content="Manage inventories"  Name="btnManageInventory"
+                                           ItemClick="btnManageInventory_ItemClick_1"
+                                           Glyph="{dx:DXImage Image=CalculateNow_16x16.png}" LargeGlyph="{dx:DXImage Image=CalculateNow_16x16.png}">
+                        </dxb:BarButtonItem>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
@@ -160,6 +164,18 @@
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Caption="Inventories" ItemHeight="3*" Name="inventoriesTab" Closed="True">
+                            <dxg:GridControl x:Name="gridInventories"
+                                             AutoGenerateColumns="AddNew" 
+                                             ShowBorder="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView AllowBandResizing="True" 
+                                                   AllowBestFit="True" Name="tblInventories"
+                                                   AllowColumnMoving="True" 
+                                                   AllowResizing="True"/>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </dxd:DocumentPanel>
                     </dxd:DocumentGroup>
                     <dxd:DocumentGroup Caption="DetailView" ItemHeight="1.5*" ShowCloseButton="True"
                                        ClosePageButtonShowMode="InActiveTabPageHeader">
@@ -175,7 +191,7 @@
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.3*" />
-                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="0.9*" />
                                     <ColumnDefinition Width="0.15*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Content="Name" FontSize="16" />
@@ -217,8 +233,7 @@
                                        Content="Clear text"/>
                                 </StackPanel>
                             </Grid>
-                        </dxd:DocumentPanel>
-                        
+                        </dxd:DocumentPanel>                      
                         <dxd:DocumentPanel Caption="Sale revenue details" Name="dpSaleRevenues">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -237,7 +252,7 @@
                                              AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
                                     <dxg:TableView AllowBandResizing="True" Name="tblSaleRevenueDetails"
-                                                   AllowBestFit="True"
+                                                   AllowBestFit="True" ShowBandsPanel="True"
                                                    AllowColumnMoving="True" 
                                                    AllowResizing="True"/>
                                 </dxg:GridControl.View>
@@ -255,6 +270,7 @@
                                 </dxg:GridControl>
                             </Grid>
                         </dxd:DocumentPanel>
+                        
                     </dxd:DocumentGroup>
                 </dxd:LayoutGroup>
                 <dxd:TabbedGroup ItemWidth="*">

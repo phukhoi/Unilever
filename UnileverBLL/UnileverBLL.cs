@@ -287,5 +287,11 @@ namespace UnileverBLL
                 throw;
             }
         }
+
+        public List<Inventory> GetListInventories()
+        {
+            List<Inventory> list = this.UnileverEntities.Inventories.ToList();
+            return list;
+        }
     }
 }

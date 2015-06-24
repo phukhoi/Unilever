@@ -26,3 +26,5 @@ D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.Properties.Resources.resources
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.csproj.GenerateResource.Cache
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.exe
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.pdb
+D:\CODE\C#\Unilever\Unilever\obj\Release\DistributorLayout\DistributorWindow.baml
+D:\CODE\C#\Unilever\Unilever\obj\Release\DistributorLayout\DistributorWindow.g.cs

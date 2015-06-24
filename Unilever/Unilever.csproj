@@ -128,7 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLLFactory.cs" />
-    <Compile Include="Distributor\DistributorWindow.xaml.cs">
+    <Compile Include="DistributorLayout\DistributorWindow.xaml.cs">
       <DependentUpon>DistributorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Handle\UnileverError.cs" />
@@ -162,7 +162,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Distributor\DistributorWindow.xaml">
+    <Page Include="DistributorLayout\DistributorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -29,6 +29,14 @@ using Unilever.Handle;
 
 namespace Unilever
 {
+    public partial class App : Application
+    {
+        private void Application_Startup (object sender, StartupEventArgs e)
+        {
+            DistributorLayout.DistributorWindow dw = new DistributorLayout.DistributorWindow();
+            dw.Show();
+        }
+    }
     public partial class MainWindow : DXRibbonWindow
     {
         public UnileverBLL.UnileverBLL UnileverBll { get; set; }

@@ -13,7 +13,7 @@ using System.Windows.Shapes;
 using DevExpress.Xpf.Ribbon;
 
 
-namespace Unilever.Distributor
+namespace Unilever.DistributorLayout
 {
     /// <summary>
     /// Interaction logic for DistributorWindow.xaml
@@ -51,6 +51,21 @@ namespace Unilever.Distributor
         }
 
         private void btnManageInventory_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnViewSalemans_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void btnManageLiability_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
+        {
+
+        }
+
+        private void tblSalemans_FocusedRowChanged_1(object sender, DevExpress.Xpf.Grid.FocusedRowChangedEventArgs e)
         {
 
         }

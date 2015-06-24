@@ -53,6 +53,8 @@
                             Content="View Products List" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" LargeGlyph="{dx:DXImage Image=EditDataSource_32x32.png}"/>
                         <dxb:BarButtonItem Name="btnViewCats" ItemClick="btnViewCats_ItemClick_1" 
                             Content="View Categories List" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
+                        <dxb:BarButtonItem Name="btnAddOrder" ItemClick="btnAddOrder_ItemClick_1" 
+                            Content="Add Order" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Name="Third" Caption="Distributors">
@@ -175,6 +177,56 @@
                                                    AllowResizing="True"/>
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
+                        </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Caption="Add order" ItemHeight="3*" Name="addOrderTab" Closed="False">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <dxg:GridControl Name="gridShowProduct_addorder" AutoGenerateColumns="AddNew" ShowBorder="False">
+                                    <dxg:GridControl.View>
+                                        <dxg:TableView Name="tblShowProduct_addorder">
+                                        </dxg:TableView>
+                                    </dxg:GridControl.View>
+                                </dxg:GridControl> 
+                                <dxe:TextEdit Name="txtproquantity_addorder" Grid.Column="1" Grid.Row="0" Height="30">
+                                    
+                                </dxe:TextEdit>
+                                <ListView Name="lwvProductReview" Grid.Row="1" Grid.Column="0">                                   
+                                </ListView>
+                                <Grid Grid.Row="1" Grid.Column="1">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Row="0" Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <RadioButton Name="rdPeriod" Content="Period" Margin="0,10,0,0"/>
+                                        <RadioButton Name="rdNonPeriod" Grid.Row="1" Content="Non-Period" Margin="0,10,0,0" />
+                                    </Grid>
+                                    <Grid Grid.Row="1" Grid.Column="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition />
+                                        </Grid.RowDefinitions>
+                                        <RadioButton Name="rdPaid" Content="Paid" Margin="0,10,0,0"/>
+                                        <RadioButton Name="rdUnpaid" Grid.Row="1" Content="Unpaid" Margin="0,10,0,0" />
+                                    </Grid>
+                                    
+                                </Grid>
+                            </Grid>
                         </dxd:DocumentPanel>
                     </dxd:DocumentGroup>
                     <dxd:DocumentGroup Caption="DetailView" ItemHeight="1.5*" ShowCloseButton="True"

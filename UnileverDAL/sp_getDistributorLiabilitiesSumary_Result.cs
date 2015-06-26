@@ -11,7 +11,7 @@ namespace UnileverDAL
 {
     using System;
     
-    public partial class sp_getDistributorLiabilitiesSumary_Result1
+    public partial class sp_getDistributorLiabilitiesSumary_Result
     {
         public Nullable<int> DistributorId { get; set; }
         public Nullable<int> OrderId { get; set; }

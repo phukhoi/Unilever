@@ -37,7 +37,7 @@ namespace Unilever.DistributorLayout
             {
                 this.gridSalemans.ItemsSource = this.SalemanBLL.GetListProduct();
             }
-        }
+            }
 
         private void btnViewCats_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {

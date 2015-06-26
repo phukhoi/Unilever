@@ -38,13 +38,13 @@ namespace UnileverDAL
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<SaleRevenue> SaleRevenues { get; set; }
     
-        public virtual ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> sp_getDistributorLiabilitiesSumary(Nullable<int> distribid)
+        public virtual ObjectResult<sp_getDistributorLiabilitiesSumary_Result> sp_getDistributorLiabilitiesSumary(Nullable<int> distribid)
         {
             var distribidParameter = distribid.HasValue ?
                 new ObjectParameter("distribid", distribid) :
                 new ObjectParameter("distribid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getDistributorLiabilitiesSumary_Result1>("sp_getDistributorLiabilitiesSumary", distribidParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_getDistributorLiabilitiesSumary_Result>("sp_getDistributorLiabilitiesSumary", distribidParameter);
         }
     
         public virtual ObjectResult<sp_getSaleRevenueSumaryByDistribId_Result> sp_getSaleRevenueSumaryByDistribId(Nullable<int> distribid)

@@ -249,16 +249,16 @@ namespace UnileverBLL
             }
         }
 
-        public List<sp_getDistributorLiabilitiesSumary_Result1> GetListDefferredLiabilities()
+        public List<sp_getDistributorLiabilitiesSumary_Result> GetListDefferredLiabilities()
         {
             try
             {
-                List<sp_getDistributorLiabilitiesSumary_Result1> list =
-                    new List<sp_getDistributorLiabilitiesSumary_Result1>();
+                List<sp_getDistributorLiabilitiesSumary_Result> list =
+                    new List<sp_getDistributorLiabilitiesSumary_Result>();
 
                 foreach (int dbid in GetListDistributorId())
                 {
-                    System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> res =
+                    System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result> res =
                           Entities.sp_getDistributorLiabilitiesSumary(dbid);
                     list.AddRange(res);
                 }

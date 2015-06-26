@@ -35,6 +35,8 @@ namespace Unilever
         {
             DistributorLayout.DistributorWindow dw = new DistributorLayout.DistributorWindow();
             dw.Show();
+            //Unilever.MainWindow mw = new MainWindow();
+            //mw.Show();
 
         }
     }
@@ -162,7 +164,7 @@ namespace Unilever
         {
             try
             {
-                List<sp_getDistributorLiabilitiesSumary_Result1> list = this.UnileverBll.GetListDefferredLiabilities();
+                List<sp_getDistributorLiabilitiesSumary_Result> list = this.UnileverBll.GetListDefferredLiabilities();
                 this.gridLiabities.ItemsSource = list;
             }
             catch (Exception)
@@ -438,7 +440,7 @@ namespace Unilever
             {
                 Utils.WakeUp(this.manageTab);
                 this.liabilityTab.IsActive = true;
-                sp_getDistributorLiabilitiesSumary_Result1 sp = e.NewRow as sp_getDistributorLiabilitiesSumary_Result1;
+                sp_getDistributorLiabilitiesSumary_Result sp = e.NewRow as sp_getDistributorLiabilitiesSumary_Result;
                 if (sp != null)
                 {
                     DefferredLiability dl = this.UnileverBll.GetDefferredLiabilityByOrderId(sp.OrderId.Value);
@@ -470,7 +472,7 @@ namespace Unilever
                 if (sr != null)
                 {
                     List<sp_getSaleRevenueSumaryByDistribId_Result> list =
-                        this.UnileverBll.GetListSaleRevenueByDistributorId(sr.DistributorID.Value);
+                        this.UnileverBll.GetListSaleRevenueByDistributorId(sr.DistributorID);
                     this.gridSaleRevenueDetails.ItemsSource = list;
 
                     var srSumaryReduce = list.Select(s => new

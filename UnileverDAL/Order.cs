@@ -26,11 +26,11 @@ namespace UnileverDAL
         public int DistributorID { get; set; }
         public int OrderTypeId { get; set; }
     
+        public virtual Distributor Distributor { get; set; }
+        public virtual OrderType OrderType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DefferredLiability> DefferredLiabilities { get; set; }
-        public virtual OrderType OrderType { get; set; }
-        public virtual Distributor Distributor { get; set; }
     }
 }

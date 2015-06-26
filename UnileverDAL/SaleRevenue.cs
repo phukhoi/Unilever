@@ -15,7 +15,7 @@ namespace UnileverDAL
     public partial class SaleRevenue
     {
         public int ID { get; set; }
-        public Nullable<int> DistributorID { get; set; }
+        public int DistributorID { get; set; }
         public Nullable<int> ProId { get; set; }
         public Nullable<int> SoldQuantity { get; set; }
         public Nullable<int> TotalCash { get; set; }

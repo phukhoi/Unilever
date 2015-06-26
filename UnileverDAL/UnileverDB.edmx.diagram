@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="98685ffb7bf14345b583f6b4747b2024" Name="Diagram1">
-        <EntityTypeShape EntityType="UnileverModel.Category" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+      <Diagram DiagramId="75c7ec42c6824b3691316303bb1d6b75" Name="Diagram1">
+        <EntityTypeShape EntityType="UnileverModel.Category" Width="1.5" PointX="4.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverModel.DefferredLiability" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.Distributor" Width="1.5" PointX="1.125" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.InterestRate" Width="1.5" PointX="2.875" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.Inventory" Width="1.5" PointX="0.75" PointY="0.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.OrderDetail" Width="1.5" PointX="4.625" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.Order" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.OrderType" Width="1.5" PointX="4.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverModel.Product" Width="1.5" PointX="6.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.Distributor" Width="1.5" PointX="2.375" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.InterestRate" Width="1.5" PointX="4.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.Inventory" Width="1.5" PointX="6.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.OrderDetail" Width="1.5" PointX="8.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.Order" Width="1.75" PointX="2.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.OrderType" Width="1.5" PointX="4.5" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.Product" Width="1.5" PointX="6.625" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverModel.SaleRevenue" Width="1.5" PointX="4.75" PointY="5.5" IsExpanded="true" />
         <AssociationConnector Association="UnileverModel.CategoryProduct" />
+        <AssociationConnector Association="UnileverModel.DistributorOrder" />
+        <AssociationConnector Association="UnileverModel.OrderTypeOrder" />
         <AssociationConnector Association="UnileverModel.OrderOrderDetail" />
         <AssociationConnector Association="UnileverModel.OrderDefferredLiability" />
-        <AssociationConnector Association="UnileverModel.OrderTypeOrder" />
         <AssociationConnector Association="UnileverModel.ProductOrderDetail" />
-        <AssociationConnector Association="UnileverModel.DistributorOrder" />
-        <EntityTypeShape EntityType="UnileverModel.SaleRevenue" Width="1.5" PointX="2.875" PointY="5.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

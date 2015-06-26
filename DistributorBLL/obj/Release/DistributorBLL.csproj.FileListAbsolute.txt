@@ -1,7 +1,0 @@
-D:\CODE\C#\Unilever\DistributorBLL\bin\Release\DistributorBLL.dll
-D:\CODE\C#\Unilever\DistributorBLL\bin\Release\DistributorBLL.pdb
-D:\CODE\C#\Unilever\DistributorBLL\bin\Release\UnileverObject.dll
-D:\CODE\C#\Unilever\DistributorBLL\bin\Release\UnileverObject.pdb
-D:\CODE\C#\Unilever\DistributorBLL\obj\Release\DistributorBLL.csprojResolveAssemblyReference.cache
-D:\CODE\C#\Unilever\DistributorBLL\obj\Release\DistributorBLL.dll
-D:\CODE\C#\Unilever\DistributorBLL\obj\Release\DistributorBLL.pdb

@@ -12,27 +12,28 @@ namespace UnileverBLL
 {
     public class UnileverBLL : BLL, IBLL
     {
-        public UnileverEntities UnileverEntities { get; set; }
+        public UnileverEntities Entities { get; set; }
+
         public UnileverBLL()
         {
-            UnileverEntities = new UnileverEntities();
+            Entities = new UnileverEntities();
         }
         public List<Product> GetListProducts()
         {
-            return UnileverEntities.Products.ToList();
+            return Entities.Products.ToList();
         }
         public Category GetCategoryById(int catid)
         {
-            return UnileverEntities.Categories.Where(c => c.ID == catid)
+            return Entities.Categories.Where(c => c.ID == catid)
                 .FirstOrDefault();
         }
         public List<Category> GetListCategories()
         {
-            return UnileverEntities.Categories.ToList();
+            return Entities.Categories.ToList();
         }
         public List<Distributor> GetListDistributors()
         {
-            return this.UnileverEntities.Distributors.ToList();
+            return this.Entities.Distributors.ToList();
         }
         public bool SaveChangesDistributor(int distribId, string name, string email, string phone, string addr, CRUDOPTION option)
         {
@@ -50,7 +51,7 @@ namespace UnileverBLL
                                 Addr = addr,
                                 Phone = phone
                             };
-                            this.UnileverEntities.Distributors.Add(dt);
+                            this.Entities.Distributors.Add(dt);
                             break;
                         }
                     case CRUDOPTION.UPDATE:
@@ -65,12 +66,12 @@ namespace UnileverBLL
                     case CRUDOPTION.DELETE:
                         {
                             dt = GetDistributorById(distribId);
-                            this.UnileverEntities.Distributors.Remove(dt);
+                            this.Entities.Distributors.Remove(dt);
                             break;
                         }
                     default: break;
                 }
-                this.UnileverEntities.SaveChanges();
+                this.Entities.SaveChanges();
             }
             catch (Exception)
             {
@@ -81,12 +82,12 @@ namespace UnileverBLL
 
         public Distributor GetDistributorById(int distribId)
         {
-            Distributor dt = this.UnileverEntities.Distributors.Where(d => d.ID == distribId).FirstOrDefault();
+            Distributor dt = this.Entities.Distributors.Where(d => d.ID == distribId).FirstOrDefault();
             return dt;
         }
         public Product GetProductById(int ID)
         {
-            Product p = UnileverEntities.Products.Where(pr => pr.ID == ID).FirstOrDefault();
+            Product p = Entities.Products.Where(pr => pr.ID == ID).FirstOrDefault();
             return p;
         }
         public bool SaveChangesProduct(int proId, string name, string catid, string price,
@@ -114,12 +115,12 @@ namespace UnileverBLL
                             p.CatID = cid;
                             DateTime ipd = DateTime.Parse(importdate);
                             p.ImportDate = ipd;
-                            this.UnileverEntities.Products.Add(p);
+                            this.Entities.Products.Add(p);
                             break;
                         }
                     case CRUDOPTION.UPDATE:
                         {
-                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
+                            p = this.Entities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
                             p.Name = name;
                             p.Descript = descript;
                             int rm;
@@ -135,13 +136,13 @@ namespace UnileverBLL
                         }
                     case CRUDOPTION.DELETE:
                         {
-                            p = this.UnileverEntities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
-                            this.UnileverEntities.Products.Remove(p);
+                            p = this.Entities.Products.Where(p1 => p1.ID == proId).FirstOrDefault();
+                            this.Entities.Products.Remove(p);
                             break;
                         }
                     default: break;
                 }
-                this.UnileverEntities.SaveChanges();
+                this.Entities.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -154,7 +155,7 @@ namespace UnileverBLL
         {
             try
             {
-                DefferredLiability dl = this.UnileverEntities.DefferredLiabilities
+                DefferredLiability dl = this.Entities.DefferredLiabilities
                         .Where(d => d.OrderID == ordID).FirstOrDefault();
                 return dl;
             }
@@ -169,7 +170,7 @@ namespace UnileverBLL
         {
             try
             {
-                DefferredLiability dl = this.UnileverEntities.DefferredLiabilities
+                DefferredLiability dl = this.Entities.DefferredLiabilities
                     .FirstOrDefault(d => d.ID == defId);
                 return dl;
             }
@@ -192,7 +193,7 @@ namespace UnileverBLL
                 {
                     dl.PeriodOfDebt += rd;
                 }
-                this.UnileverEntities.SaveChanges();
+                this.Entities.SaveChanges();
             }
             catch (NullReferenceException)
             {
@@ -208,7 +209,7 @@ namespace UnileverBLL
         {
             try
             {
-                IEnumerable<int> res = from d in this.UnileverEntities.Distributors
+                IEnumerable<int> res = from d in this.Entities.Distributors
                                        select d.ID;
                 return res.ToList();
             }
@@ -224,8 +225,8 @@ namespace UnileverBLL
             try
             {
                 DefferredLiability dl = this.GetDefferredLiabilityById(defid);
-                this.UnileverEntities.DefferredLiabilities.Remove(dl);
-                this.UnileverEntities.SaveChanges();
+                this.Entities.DefferredLiabilities.Remove(dl);
+                this.Entities.SaveChanges();
             }
             catch (Exception)
             {
@@ -238,7 +239,7 @@ namespace UnileverBLL
         {
             try
             {
-                List<SaleRevenue> list = this.UnileverEntities.SaleRevenues.ToList();
+                List<SaleRevenue> list = this.Entities.SaleRevenues.ToList();
                 return list;
             }
             catch (Exception)
@@ -258,7 +259,7 @@ namespace UnileverBLL
                 foreach (int dbid in GetListDistributorId())
                 {
                     System.Data.Entity.Core.Objects.ObjectResult<sp_getDistributorLiabilitiesSumary_Result1> res =
-                          UnileverEntities.sp_getDistributorLiabilitiesSumary(dbid);
+                          Entities.sp_getDistributorLiabilitiesSumary(dbid);
                     list.AddRange(res);
                 }
                 return list;
@@ -277,7 +278,7 @@ namespace UnileverBLL
                 List<sp_getSaleRevenueSumaryByDistribId_Result> list =
                     new List<sp_getSaleRevenueSumaryByDistribId_Result>();
                 System.Data.Entity.Core.Objects.ObjectResult<sp_getSaleRevenueSumaryByDistribId_Result> res =
-                      UnileverEntities.sp_getSaleRevenueSumaryByDistribId(distribId);
+                      Entities.sp_getSaleRevenueSumaryByDistribId(distribId);
                 list.AddRange(res);
                 return list;
             }
@@ -290,7 +291,7 @@ namespace UnileverBLL
 
         public List<Inventory> GetListInventories()
         {
-            List<Inventory> list = this.UnileverEntities.Inventories.ToList();
+            List<Inventory> list = this.Entities.Inventories.ToList();
             return list;
         }
     }

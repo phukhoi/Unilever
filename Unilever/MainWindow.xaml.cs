@@ -35,6 +35,7 @@ namespace Unilever
         {
             DistributorLayout.DistributorWindow dw = new DistributorLayout.DistributorWindow();
             dw.Show();
+
         }
     }
     public partial class MainWindow : DXRibbonWindow

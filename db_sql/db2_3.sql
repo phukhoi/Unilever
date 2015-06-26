@@ -75,9 +75,11 @@ create table SaleRevenues -- doanh số
 go
 use master
 go
-create database UnileverDMS_Customers
+drop database UnileverDMS_Customers
 go
-use UnileverDMS_Customers
+create database UnileverDMS_Salemans
+go
+use UnileverDMS_Salemans
 go
 create table Customers
 (

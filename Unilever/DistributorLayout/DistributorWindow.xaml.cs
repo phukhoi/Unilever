@@ -11,7 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using DevExpress.Xpf.Ribbon;
-
+using UnileverDMSSalemanDAL;
+using Sale_EmployeeBLL;
+using UnileverDMSSalemanDAL;
 
 namespace Unilever.DistributorLayout
 {
@@ -20,14 +22,21 @@ namespace Unilever.DistributorLayout
     /// </summary>
     public partial class DistributorWindow : DXRibbonWindow
     {
+        /* field - property */
+        public SaleEmployeeBLL SalemanBLL { get; set; }
+        /* --/ */
         public DistributorWindow()
         {
             InitializeComponent();
+            SalemanBLL = (SaleEmployeeBLL)BLLFactory.CreateInstance(BLLFactory.SALE_EMPLOYEE_BLL);
         }
 
         private void btnViewPros_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)
         {
-
+            if (this.SalemanBLL.IsDbConnected())
+            {
+                this.gridSalemans.ItemsSource = this.SalemanBLL.GetListProduct();
+            }
         }
 
         private void btnViewCats_ItemClick_1(object sender, DevExpress.Xpf.Bars.ItemClickEventArgs e)

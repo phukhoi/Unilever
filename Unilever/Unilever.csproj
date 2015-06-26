@@ -194,6 +194,10 @@
       <Project>{2cd30108-b681-4896-89eb-ede4953fc674}</Project>
       <Name>UnileverDAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UnileverDMSSalemanDAL\UnileverDMSSalemanDAL.csproj">
+      <Project>{95e1fbb7-6ed5-4fc8-bfda-e83266b9728d}</Project>
+      <Name>UnileverDMSSalemanDAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UnileverObject\UnileverObject.csproj">
       <Project>{1ece6733-0fa2-45a1-a28b-78c28efbf666}</Project>
       <Name>UnileverObject</Name>

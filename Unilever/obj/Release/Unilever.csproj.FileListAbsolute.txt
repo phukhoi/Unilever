@@ -28,3 +28,5 @@ D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.exe
 D:\CODE\C#\Unilever\Unilever\obj\Release\Unilever.pdb
 D:\CODE\C#\Unilever\Unilever\obj\Release\DistributorLayout\DistributorWindow.baml
 D:\CODE\C#\Unilever\Unilever\obj\Release\DistributorLayout\DistributorWindow.g.cs
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverDMSSalemanDAL.dll
+D:\CODE\C#\Unilever\Unilever\bin\Release\UnileverDMSSalemanDAL.pdb

@@ -21,7 +21,7 @@ namespace UnileverDMSDistributorDAL
         public Nullable<int> Price { get; set; }
         public Nullable<int> TotalAmount { get; set; }
     
-        public virtual Order Order { get; set; }
         public virtual Product Product { get; set; }
+        public virtual Order Order { get; set; }
     }
 }

@@ -18,8 +18,6 @@ namespace UnileverDMSDistributorDAL
         public SaleMan()
         {
             this.Orders = new HashSet<Order>();
-            this.SaleRevenues = new HashSet<SaleRevenue>();
-            this.DefferredLiabilities = new HashSet<DefferredLiability>();
         }
     
         public int ID { get; set; }
@@ -29,12 +27,8 @@ namespace UnileverDMSDistributorDAL
         public string Phone { get; set; }
         public int SaleAreaId { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders { get; set; }
         public virtual SaleArea SaleArea { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SaleRevenue> SaleRevenues { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DefferredLiability> DefferredLiabilities { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

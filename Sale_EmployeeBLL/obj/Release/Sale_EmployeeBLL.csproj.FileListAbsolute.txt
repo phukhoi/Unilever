@@ -1,0 +1,14 @@
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\Sale_EmployeeBLL.dll.config
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\Sale_EmployeeBLL.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\Sale_EmployeeBLL.pdb
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\EntityFramework.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\EntityFramework.SqlServer.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\UnileverDMSSalemanDAL.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\UnileverObject.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\UnileverDMSSalemanDAL.pdb
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\UnileverObject.pdb
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\EntityFramework.xml
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\bin\Release\EntityFramework.SqlServer.xml
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\obj\Release\Sale_EmployeeBLL.csprojResolveAssemblyReference.cache
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\obj\Release\Sale_EmployeeBLL.dll
+D:\CODE\C#\Unilever\Sale_EmployeeBLL\obj\Release\Sale_EmployeeBLL.pdb

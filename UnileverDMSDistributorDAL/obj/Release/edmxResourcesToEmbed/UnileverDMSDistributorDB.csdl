@@ -1,0 +1,179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UnileverDMS_DistributorsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="UnileverDMS_DistributorsModel.CategoryProduct" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="DefferredLiability">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderId" Type="Int32" Nullable="false" />
+    <Property Name="SaleManId" Type="Int32" Nullable="false" />
+    <Property Name="DebtDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProID" Type="Int32" Nullable="false" />
+    <Property Name="OrderID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="TotalAmount" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="UnileverDMS_DistributorsModel.ProductOrderDetail" FromRole="OrderDetail" ToRole="Product" />
+    <NavigationProperty Name="Order" Relationship="UnileverDMS_DistributorsModel.OrderOrderDetail" FromRole="OrderDetail" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderDate" Type="DateTime" Precision="3" />
+    <Property Name="SaleManId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="UnileverDMS_DistributorsModel.OrderOrderDetail" FromRole="Order" ToRole="OrderDetail" />
+    <NavigationProperty Name="SaleMan" Relationship="UnileverDMS_DistributorsModel.SaleManOrder" FromRole="Order" ToRole="SaleMan" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CatID" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Int32" />
+    <Property Name="ImportDate" Type="DateTime" Precision="0" />
+    <Property Name="RemainingAmount" Type="Int32" />
+    <Property Name="Descript" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Category" Relationship="UnileverDMS_DistributorsModel.CategoryProduct" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="OrderDetails" Relationship="UnileverDMS_DistributorsModel.ProductOrderDetail" FromRole="Product" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="SaleArea">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Area" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SaleMen" Relationship="UnileverDMS_DistributorsModel.SaleAreaSaleMan" FromRole="SaleArea" ToRole="SaleMan" />
+  </EntityType>
+  <EntityType Name="SaleMan">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Addr" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="SaleAreaId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="SaleArea" Relationship="UnileverDMS_DistributorsModel.SaleAreaSaleMan" FromRole="SaleMan" ToRole="SaleArea" />
+    <NavigationProperty Name="Orders" Relationship="UnileverDMS_DistributorsModel.SaleManOrder" FromRole="SaleMan" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="SaleRevenue">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SaleManId" Type="Int32" Nullable="false" />
+    <Property Name="ProId" Type="Int32" Nullable="false" />
+    <Property Name="SoldQuantity" Type="Int32" />
+    <Property Name="TotalCash" Type="Int32" />
+    <Property Name="StatisDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="UnileverDMS_DistributorsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="DefferredLiabilities" EntityType="Self.DefferredLiability" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="SaleAreas" EntityType="Self.SaleArea" />
+    <EntitySet Name="SaleMans" EntityType="Self.SaleMan" />
+    <EntitySet Name="SaleRevenues" EntityType="Self.SaleRevenue" />
+    <AssociationSet Name="CategoryProduct" Association="UnileverDMS_DistributorsModel.CategoryProduct">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="ProductOrderDetail" Association="UnileverDMS_DistributorsModel.ProductOrderDetail">
+      <End Role="Product" EntitySet="Products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="OrderOrderDetail" Association="UnileverDMS_DistributorsModel.OrderOrderDetail">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="SaleAreaSaleMan" Association="UnileverDMS_DistributorsModel.SaleAreaSaleMan">
+      <End Role="SaleArea" EntitySet="SaleAreas" />
+      <End Role="SaleMan" EntitySet="SaleMans" />
+    </AssociationSet>
+    <AssociationSet Name="SaleManOrder" Association="UnileverDMS_DistributorsModel.SaleManOrder">
+      <End Role="SaleMan" EntitySet="SaleMans" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="CategoryProduct">
+    <End Type="UnileverDMS_DistributorsModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="UnileverDMS_DistributorsModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CatID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProductOrderDetail">
+    <End Type="UnileverDMS_DistributorsModel.Product" Role="Product" Multiplicity="1" />
+    <End Type="UnileverDMS_DistributorsModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderOrderDetail">
+    <End Type="UnileverDMS_DistributorsModel.Order" Role="Order" Multiplicity="1" />
+    <End Type="UnileverDMS_DistributorsModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SaleAreaSaleMan">
+    <End Type="UnileverDMS_DistributorsModel.SaleArea" Role="SaleArea" Multiplicity="1" />
+    <End Type="UnileverDMS_DistributorsModel.SaleMan" Role="SaleMan" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SaleArea">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SaleMan">
+        <PropertyRef Name="SaleAreaId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SaleManOrder">
+    <End Type="UnileverDMS_DistributorsModel.SaleMan" Role="SaleMan" Multiplicity="1" />
+    <End Type="UnileverDMS_DistributorsModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SaleMan">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="SaleManId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -14,6 +14,7 @@
     xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
     xmlns:dxga="http://schemas.devexpress.com/winfx/2008/xaml/gauges"
     Title="DistributorWindow" Height="609.701" Width="1142.105"
+    Loaded="DXRibbonWindow_Loaded_1"
     >
 
     <DockPanel>
@@ -32,10 +33,13 @@
                     <dxr:RibbonPageGroup Caption="{x:Null}" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" SmallGlyph="{dx:DXImage Image=EditDataSource_16x16.png}">
                         <dxb:BarButtonItem Name="btnViewPros" ItemClick="btnViewPros_ItemClick_1"
                             Content="View Products List" Glyph="{dx:DXImage Image=EditDataSource_32x32.png}" LargeGlyph="{dx:DXImage Image=EditDataSource_32x32.png}"/>
+                        <dxb:BarButtonItem Name="btnAddProducts" 
+                            Content="Add new product" Glyph="{dx:DXImage Image=News_32x32.png}" LargeGlyph="{dx:DXImage Image=News_32x32.png}"/>
                         <dxb:BarButtonItem Name="btnViewCats" ItemClick="btnViewCats_ItemClick_1" 
                             Content="View Categories List" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
                         <dxb:BarButtonItem Name="btnAddOrder" ItemClick="btnAddOrder_ItemClick_1" 
                             Content="Add Order" Glyph="{dx:DXImage Image=FullStackedBar2_32x32.png}" LargeGlyph="{dx:DXImage Image=FullStackedBar2_32x32.png}"/>
+                        
                     </dxr:RibbonPageGroup>
                 </dxr:RibbonPage>
                 <dxr:RibbonPage Name="Third" Caption="Salemans">
@@ -85,7 +89,7 @@
             <dxd:LayoutGroup>
                 <dxd:LayoutGroup Orientation="Vertical"  ItemWidth="3*">
                     <dxd:DocumentGroup ItemHeight="3*" Name="documentGroup" ClosePageButtonShowMode="InActiveTabPageHeader">
-                        <dxd:DocumentPanel Name="productTab" Caption="Products">
+                        <dxd:DocumentPanel Name="productTab" Caption="Products list">
                             <dxg:GridControl x:Name="gridSalemans"
                                              AutoGenerateColumns="AddNew" ShowBorder="False">
                                 <dxg:GridControl.View>
@@ -97,6 +101,19 @@
                                 </dxg:GridControl.View>
                             </dxg:GridControl>
                         </dxd:DocumentPanel>
+                        <dxd:DocumentPanel Name="categoriesTab" Caption="Categories list" Closed="True">
+                            <dxg:GridControl x:Name="gridCategories"
+                                             AutoGenerateColumns="AddNew" ShowBorder="False">
+                                <dxg:GridControl.View>
+                                    <dxg:TableView AllowBandResizing="True" Name="tblCategories"
+                                                   AllowBestFit="True"
+                                                   FocusedRowChanged="tblCategories_FocusedRowChanged_1"
+                                                   AllowColumnMoving="True" 
+                                                   AllowResizing="True"/>
+                                </dxg:GridControl.View>
+                            </dxg:GridControl>
+                        </dxd:DocumentPanel>
+                        
                     </dxd:DocumentGroup>
                     <dxd:DocumentGroup Caption="DetailView" ItemHeight="1.5*" ShowCloseButton="True"
                                        ClosePageButtonShowMode="InActiveTabPageHeader">
@@ -106,7 +123,7 @@
                     </dxd:DocumentGroup>
                 </dxd:LayoutGroup>
                 <dxd:TabbedGroup ItemWidth="*">
-                    <dxd:LayoutPanel Caption="Distributor" Name="manageTab" Closed="True">
+                    <dxd:LayoutPanel Caption="Manage product" Name="manageTab" Closed="True">
                     </dxd:LayoutPanel>
                 </dxd:TabbedGroup>
             </dxd:LayoutGroup>

@@ -33,10 +33,10 @@ namespace Unilever
     {
         private void Application_Startup (object sender, StartupEventArgs e)
         {
-            DistributorLayout.DistributorWindow dw = new DistributorLayout.DistributorWindow();
-            dw.Show();
-            //Unilever.MainWindow mw = new MainWindow();
-            //mw.Show();
+            //DistributorLayout.DistributorWindow dw = new DistributorLayout.DistributorWindow();
+            //dw.Show();
+            Unilever.MainWindow mw = new MainWindow();
+            mw.Show();
 
         }
     }

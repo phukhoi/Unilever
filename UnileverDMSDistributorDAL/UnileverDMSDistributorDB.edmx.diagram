@@ -4,22 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6483f6fc4d534b13ba2a5060507a5124" Name="Diagram1" ZoomLevel="74">
-        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.Category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.DefferredLiability" Width="1.5" PointX="4.5" PointY="1" IsExpanded="true" />
+      <Diagram DiagramId="13942bf6e14d4573aeaff14b55ae716d" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.Category" Width="1.5" PointX="2.125" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.DefferredLiability" Width="1.5" PointX="11.75" PointY="0.625" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.OrderDetail" Width="1.5" PointX="3.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.Order" Width="1.5" PointX="6.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.Product" Width="1.5" PointX="1.625" PointY="4" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.SaleArea" Width="1.5" PointX="9.125" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.SaleMan" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.SaleMan" Width="1.5" PointX="5.5" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="UnileverDMS_DistributorsModel.SaleRevenue" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="UnileverDMS_DistributorsModel.CategoryProduct" />
-        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleManOrder" />
-        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleAreaSaleMan" />
-        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleManSaleRevenue" />
-        <AssociationConnector Association="UnileverDMS_DistributorsModel.OrderOrderDetail" />
-        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleManDefferredLiability" />
         <AssociationConnector Association="UnileverDMS_DistributorsModel.ProductOrderDetail" />
+        <AssociationConnector Association="UnileverDMS_DistributorsModel.OrderOrderDetail" />
+        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleAreaSaleMan" />
+        <AssociationConnector Association="UnileverDMS_DistributorsModel.SaleManOrder" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

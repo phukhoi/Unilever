@@ -18,7 +18,5 @@ namespace UnileverDMSDistributorDAL
         public int OrderId { get; set; }
         public int SaleManId { get; set; }
         public Nullable<System.DateTime> DebtDate { get; set; }
-    
-        public virtual SaleMan SaleMan { get; set; }
     }
 }

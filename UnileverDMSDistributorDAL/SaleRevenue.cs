@@ -20,7 +20,5 @@ namespace UnileverDMSDistributorDAL
         public Nullable<int> SoldQuantity { get; set; }
         public Nullable<int> TotalCash { get; set; }
         public Nullable<System.DateTime> StatisDate { get; set; }
-    
-        public virtual SaleMan SaleMan { get; set; }
     }
 }

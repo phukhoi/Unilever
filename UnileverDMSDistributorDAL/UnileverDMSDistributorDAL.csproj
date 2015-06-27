@@ -90,14 +90,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="packages.config" />
     <EntityDeploy Include="UnileverDMSDistributorDB.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>UnileverDMSDistributorDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.Config" />
-    <None Include="packages.config" />
     <None Include="UnileverDMSDistributorDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>UnileverDMSDistributorDB.edmx</DependentUpon>

@@ -24,8 +24,8 @@ namespace UnileverDMSDistributorDAL
         public Nullable<System.DateTime> OrderDate { get; set; }
         public int SaleManId { get; set; }
     
-        public virtual SaleMan SaleMan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+        public virtual SaleMan SaleMan { get; set; }
     }
 }
